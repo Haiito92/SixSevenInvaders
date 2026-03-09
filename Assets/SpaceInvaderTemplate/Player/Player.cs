@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     void UpdateMovement()
     {
-        float move = Input.GetAxis("Horizontal");
+        float move = 0.0f;
         if (Mathf.Abs(move) < deadzone) { return; }
 
         move = Mathf.Sign(move);
@@ -32,11 +32,11 @@ public class Player : MonoBehaviour
 
     void UpdateActions()
     {
-        if (    Input.GetKey(KeyCode.Space) 
-            &&  Time.time > lastShootTimestamp + shootCooldown )
-        {
-            Shoot();
-        }
+        // if (Input.GetKey(KeyCode.Space) 
+        //     &&  Time.time > lastShootTimestamp + shootCooldown )
+        // {
+        //     Shoot();
+        // }
     }
 
     void Shoot()
