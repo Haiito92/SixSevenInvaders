@@ -60,7 +60,7 @@ public class Wave : MonoBehaviour
             invaderPerRow.Add(new() { id = i, invaders = new() });
         }
 
-        // Spaw the invader grid
+        // Spawn the invader grid
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < rows; j++)
