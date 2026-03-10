@@ -6,7 +6,9 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioSource m_musicSource;
-
+    [SerializeField, Range(0.1f, 100.0f)] private float  m_musicFadeOutSpeed = 1.0f;
+    [SerializeField, Range(0.1f, 100.0f)] private float  m_musicFadeInSpeed = 1.0f;
+    
     private Coroutine m_changeMusicCoroutine;
 
     #region Singleton
@@ -30,6 +32,9 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         InitSingleton();
+        
+        if(!m_musicSource) return;
+        m_musicSource.volume = 0.0f;
     }
 
     public void PlayMusic(AudioClip newMusic)
@@ -56,17 +61,29 @@ public class SoundManager : MonoBehaviour
     
     private IEnumerator ChangeMusic(AudioClip newMusic)
     {
-        m_musicSource.Stop();
+        if (m_musicSource.clip)
+        {
+            while (m_musicSource.volume > 0.0f)
+            {
+                m_musicSource.volume = Math.Max(m_musicSource.volume -  Time.deltaTime / m_musicFadeOutSpeed, 0.0f);
+                yield return null;
+            }
         
-        m_musicSource.clip = null;
+            m_musicSource.Stop();
+            m_musicSource.clip = null;
+        }
 
         if (newMusic)
         {
             m_musicSource.clip = newMusic;
             m_musicSource.Play();
+
+            while (m_musicSource.volume < 1.0f)
+            {
+                m_musicSource.volume = Math.Min(m_musicSource.volume + Time.deltaTime / m_musicFadeOutSpeed, 1.0f);
+                yield return null;
+            }
         }
-        
-        yield return null;
     }
 
     private void StopChangeMusic()
@@ -78,11 +95,15 @@ public class SoundManager : MonoBehaviour
         }
     }
     
+    [Header("Tests")]
     [SerializeField] private AudioClip m_testMusicClip;
+    [SerializeField] private AudioClip m_testMusicClip2;
 
     [Button]
     public void TestPlayMusic() => PlayMusic(m_testMusicClip);
-    
+    [Button]
+    public void TestPlayMusic2() => PlayMusic(m_testMusicClip2);
     [Button]
     public void TestStopMusic() => StopMusic();
+
 }

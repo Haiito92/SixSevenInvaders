@@ -46,7 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   m_musicSource: {fileID: 750145618233998601}
+  m_musicFadeOutSpeed: 2
+  m_musicFadeInSpeed: 2
   m_testMusicClip: {fileID: 8300000, guid: 5dbae8cf04bee81429dd8c8115f7af76, type: 3}
+  m_testMusicClip2: {fileID: 8300000, guid: 6fab8432db43c2c4ca948e0101196798, type: 3}
 --- !u!82 &750145618233998601
 AudioSource:
   m_ObjectHideFlags: 0
@@ -60,9 +63,9 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
