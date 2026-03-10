@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
             case GameState.DEFAULT:
                 break;
             case GameState.MAIN_MENU: //MainMenu 
+                EndMenuUI.SetActive(false);
                 MainMenuUI.SetActive(true);
                 break;
             case GameState.START_GAME:
@@ -179,7 +180,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         Time.timeScale = 0f;
-        currentGameState = GameState.GAME_OVER;
+        ChangeGameState(GameState.GAME_OVER);
     }
 
     private IEnumerator WaitForNextWave(float waitTime)
