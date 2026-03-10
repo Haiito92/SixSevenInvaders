@@ -1,22 +1,120 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+
+
+public enum GameState
+{
+    DEFAULT,
+    MAIN_MENU,
+    START_GAME,
+    GAME,
+    WAVE_STANDBY,
+    GAME_OVER
+}
 
 [DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
     public enum DIRECTION { Right = 0, Up = 1, Left = 2, Down = 3 }
-
+    
     public static GameManager Instance = null;
+
+    internal Action onGameStateChange;
 
     [SerializeField] private Vector2 bounds;
     private Bounds Bounds => new Bounds(transform.position, new Vector3(bounds.x, bounds.y, 1000f));
 
     [SerializeField] private float gameOverHeight;
 
+    [SerializeField] private GameState currentGameState;
+
+    [SerializeField] private List<GameObject> listOfPatterns;
+    private List<GameObject> _listOfWaves = new List<GameObject>();
+    private int _indexOfPatterns = 0;
+
+    private IEnumerator _waitForWavesCoroutine;
+    
+    
+    //UI
+    [SerializeField] private GameObject MainMenuUI;
+
     void Awake()
     {
         Instance = this;
+        currentGameState = GameState.MAIN_MENU;
+        onGameStateChange += OnGameStateChange;
+        _waitForWavesCoroutine = WaitForNextWave(2.0f);
+    }
+
+    public void StartGame()
+    {
+        ChangeGameState(GameState.START_GAME);
+    }
+
+    public void ChangeGameState(GameState newGameState)
+    {
+        currentGameState = newGameState;
+        onGameStateChange?.Invoke();
+    }
+
+    private void OnGameStateChange()
+    {
+        switch (currentGameState)
+        {
+            case GameState.DEFAULT:
+                break;
+            case GameState.MAIN_MENU: //MainMenu 
+                break;
+            case GameState.START_GAME:
+                MainMenuUI.SetActive(false);
+                ChangeGameState(GameState.GAME);
+                break;
+            case GameState.GAME: //GameRunning main game WITH WAVE
+                StopCoroutine(_waitForWavesCoroutine);
+                if (_indexOfPatterns < listOfPatterns.Count) SpawnWave(listOfPatterns[_indexOfPatterns]);
+                else
+                {
+                    //END GAME it was last wave
+                    ChangeGameState(GameState.GAME_OVER);
+                }
+                break;
+            case GameState.WAVE_STANDBY: //Between 2 waves
+                StartCoroutine(_waitForWavesCoroutine);
+                _indexOfPatterns++;
+                break;
+            case GameState.GAME_OVER: //EndGame if player dead OR lastWave is done
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    public void SpawnWave(GameObject wavePatern)
+    {
+        GameObject newWave = Instantiate(wavePatern, new Vector3(0, 0, 0), Quaternion.identity);
+        Wave waveScript = newWave.GetComponent<Wave>();
+        if ( waveScript!= null)
+        {
+            waveScript.onWaveEnd += RemoveWaveFromList;
+            _listOfWaves.Add(newWave);
+        }
+        waveScript.StartWave();
+    }
+
+    private void RemoveWaveFromList(GameObject obj)
+    {
+        int indexOfObject = _listOfWaves.IndexOf(obj);
+        if (_listOfWaves.Contains(obj))
+        {
+            _listOfWaves.Remove(obj);
+            Destroy(obj);
+        }
+        obj.GetComponent<Wave>().onWaveEnd -= RemoveWaveFromList;
+        ChangeGameState(GameState.WAVE_STANDBY);
     }
 
     public Vector3 KeepInBounds(Vector3 position)
@@ -72,7 +170,14 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         Time.timeScale = 0f;
+        currentGameState = GameState.GAME_OVER;
     }
+
+    private IEnumerator WaitForNextWave(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ChangeGameState(GameState.GAME);
+    } 
 
     public void OnDrawGizmos()
     {
