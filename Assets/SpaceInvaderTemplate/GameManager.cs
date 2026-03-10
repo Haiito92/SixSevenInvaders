@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
-        ChangeGameState(GameState.MAIN_MENU);
+        SceneManager.LoadScene(1);
     }
 
     public void ChangeGameState(GameState newGameState)
