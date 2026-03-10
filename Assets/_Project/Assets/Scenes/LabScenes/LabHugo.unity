@@ -150,6 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounds: {x: 16, y: 9}
   gameOverHeight: 0.8
+  currentGameState: 0
+  listOfPatterns: []
+  MainMenuUI: {fileID: 0}
 --- !u!4 &434838715
 Transform:
   m_ObjectHideFlags: 0
@@ -788,11 +791,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2746318450097154451, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.61
+      value: 5.55
       objectReference: {fileID: 0}
     - target: {fileID: 2746318450097154451, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.2
+      value: 13.33
       objectReference: {fileID: 0}
     - target: {fileID: 2746318450097154451, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
       propertyPath: m_LocalPosition.z
@@ -827,8 +830,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3670955713004324345, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3670955713004324345, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670955713004324345, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
+      propertyPath: m_NormalDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670955713004324345, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670955713004324345, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
       propertyPath: m_FreeformStretching
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670955713004324345, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
+      propertyPath: m_ApplyActiveColorSpace
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5905114637719603956, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
       propertyPath: playOnAwake
@@ -836,6 +859,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5905114637719603956, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
       propertyPath: autoRandomSeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905114637719603956, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
+      propertyPath: emitterVelocityMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5905114637719603956, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
@@ -857,6 +884,10 @@ PrefabInstance:
     - target: {fileID: 5905114637719603956, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
       propertyPath: ShapeModule.m_Position.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905114637719603956, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
+      propertyPath: InitialModule.gravitySource
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5905114637719603956, guid: 150c6e28755aaaa429b0aee295991142, type: 3}
       propertyPath: ShapeModule.radiusThickness
