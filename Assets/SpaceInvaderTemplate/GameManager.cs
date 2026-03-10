@@ -1,22 +1,71 @@
+using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+
+
+public enum GameState
+{
+    DEFAULT,
+    MAIN_MENU,
+    GAME,
+    WAVE_STANDBY,
+    GAME_OVER
+}
 
 [DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
     public enum DIRECTION { Right = 0, Up = 1, Left = 2, Down = 3 }
-
+    
     public static GameManager Instance = null;
+
+    internal Action onGameStateChange;
 
     [SerializeField] private Vector2 bounds;
     private Bounds Bounds => new Bounds(transform.position, new Vector3(bounds.x, bounds.y, 1000f));
 
     [SerializeField] private float gameOverHeight;
 
+    [SerializeField] private GameState currentGameState;
+
+    [SerializeField] private List<GameObject> listOfPatterns;
+    private List<GameObject> listOfWaves;
+
     void Awake()
     {
         Instance = this;
+        currentGameState = GameState.DEFAULT;
+    }
+
+    public void ChangeGameState(GameState newGameState)
+    {
+        currentGameState = newGameState;
+        onGameStateChange?.Invoke();
+    }
+
+    public void SpawnWave(GameObject wavePatern)
+    {
+        GameObject newWave = Instantiate(wavePatern, new Vector3(0, 0, 0), Quaternion.identity);
+        Wave waveScript = newWave.GetComponent<Wave>();
+        if ( waveScript!= null)
+        {
+            waveScript.onWaveEnd += RemoveWaveFromList;
+            listOfWaves.Add(newWave);
+        }
+    }
+
+    private void RemoveWaveFromList(GameObject obj)
+    {
+        int indexOfObject = listOfWaves.IndexOf(obj);
+        if (listOfWaves.Contains(obj))
+        {
+            listOfWaves.Remove(obj);
+            Destroy(obj);
+        }
+        obj.GetComponent<Wave>().onWaveEnd -= RemoveWaveFromList;
+        ChangeGameState(GameState.WAVE_STANDBY);
     }
 
     public Vector3 KeepInBounds(Vector3 position)
@@ -72,6 +121,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         Time.timeScale = 0f;
+        currentGameState = GameState.GAME_OVER;
     }
 
     public void OnDrawGizmos()
