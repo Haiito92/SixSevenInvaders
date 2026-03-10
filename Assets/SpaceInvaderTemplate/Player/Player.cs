@@ -1,53 +1,94 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float deadzone = 0.3f;
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private InputActionReference m_moveAction;
+    [SerializeField] private InputActionReference m_shootAction;
+    
+    [SerializeField] private float m_deadzone = 0.3f;
+    [SerializeField] private float m_speed = 1f;
+    private float m_direction = 0.0f;
+    
+    [SerializeField] private Bullet m_bulletPrefab = null;
+    [SerializeField] private Transform m_shootAt = null;
+    [SerializeField] private float m_shootCooldown = 1f;
+    [SerializeField] private string m_collideWithTag = "Untagged";
 
-    [SerializeField] private Bullet bulletPrefab = null;
-    [SerializeField] private Transform shootAt = null;
-    [SerializeField] private float shootCooldown = 1f;
-    [SerializeField] private string collideWithTag = "Untagged";
+    private float m_lastShootTimestamp = Mathf.NegativeInfinity;
 
-    private float lastShootTimestamp = Mathf.NegativeInfinity;
-
-    void Update()
+    private void OnEnable()
     {
-        UpdateMovement();
-        UpdateActions();
+        if (m_moveAction)
+        {
+            m_moveAction.action.started += OnMove;
+            m_moveAction.action.performed += OnMove;
+            m_moveAction.action.canceled += OnMove;
+        }
+
+        if (m_shootAction)
+        {
+            m_shootAction.action.started += OnShoot;
+        }
     }
 
-    void UpdateMovement()
+    private void Update()
     {
-        float move = 0.0f;
-        if (Mathf.Abs(move) < deadzone) { return; }
+        Move();
+    }
 
-        move = Mathf.Sign(move);
-        float delta = move * speed * Time.deltaTime;
+    private void OnDisable()
+    {
+        if (m_moveAction)
+        {
+            m_moveAction.action.started -= OnMove;
+            m_moveAction.action.performed -= OnMove;
+            m_moveAction.action.canceled -= OnMove;
+        }
+        
+        if (m_shootAction)
+        {
+            m_moveAction.action.started -= OnShoot;
+        } 
+    }
+
+    private void OnMove(InputAction.CallbackContext ctx)
+    {
+        //float move = 0.0f;
+        //if (Mathf.Abs(move) < deadzone) { return; }
+        m_direction = Math.Sign(ctx.ReadValue<float>());
+    }
+
+    void Move()
+    {
+        float delta = m_direction * m_speed * Time.deltaTime;
         transform.position = GameManager.Instance.KeepInBounds(transform.position + Vector3.right * delta);
     }
 
-    void UpdateActions()
+    private void OnShoot(InputAction.CallbackContext ctx)
     {
-        // if (Input.GetKey(KeyCode.Space) 
-        //     &&  Time.time > lastShootTimestamp + shootCooldown )
-        // {
-        //     Shoot();
-        // }
+        if (ctx.started)
+        {
+            if (Time.time > m_lastShootTimestamp + m_shootCooldown )
+            {
+                Shoot();
+            } 
+        }
     }
 
     void Shoot()
     {
-        Instantiate(bulletPrefab, shootAt.position, Quaternion.identity);
-        lastShootTimestamp = Time.time;
+        Instantiate(m_bulletPrefab, m_shootAt.position, Quaternion.identity);
+        m_lastShootTimestamp = Time.time;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag != collideWithTag) { return; }
+        if (collision.gameObject.tag != m_collideWithTag) { return; }
 
         GameManager.Instance.PlayGameOver();
     }
