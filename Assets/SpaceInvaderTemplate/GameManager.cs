@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 
@@ -41,9 +42,21 @@ public class GameManager : MonoBehaviour
     
     //UI
     [SerializeField] private GameObject MainMenuUI;
+    [SerializeField] private GameObject EndMenuUI;
+    
+    //Player
+    [SerializeField] private Player currentPlayer;
 
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            return;
+        }
         Instance = this;
         currentGameState = GameState.MAIN_MENU;
         onGameStateChange += OnGameStateChange;
@@ -53,6 +66,13 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         ChangeGameState(GameState.START_GAME);
+    }
+
+    public void ResetGame()
+    {
+        currentPlayer.ResetPlayer();
+        StopAllCoroutines();
+        SceneManager.LoadScene(1);
     }
 
     public void ChangeGameState(GameState newGameState)
@@ -68,6 +88,8 @@ public class GameManager : MonoBehaviour
             case GameState.DEFAULT:
                 break;
             case GameState.MAIN_MENU: //MainMenu 
+                EndMenuUI.SetActive(false);
+                MainMenuUI.SetActive(true);
                 break;
             case GameState.START_GAME:
                 MainMenuUI.SetActive(false);
@@ -75,6 +97,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GAME: //GameRunning main game WITH WAVE
                 StopCoroutine(_waitForWavesCoroutine);
+                Time.timeScale = 1f;
                 if (_indexOfPatterns < listOfPatterns.Count) SpawnWave(listOfPatterns[_indexOfPatterns]);
                 else
                 {
@@ -87,6 +110,10 @@ public class GameManager : MonoBehaviour
                 _indexOfPatterns++;
                 break;
             case GameState.GAME_OVER: //EndGame if player dead OR lastWave is done
+                StopAllCoroutines();
+                Time.timeScale = 0f;
+                _indexOfPatterns = 0;
+                EndMenuUI.SetActive(true);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -169,8 +196,8 @@ public class GameManager : MonoBehaviour
     public void PlayGameOver()
     {
         Debug.Log("Game Over");
-        Time.timeScale = 0f;
-        currentGameState = GameState.GAME_OVER;
+
+        ChangeGameState(GameState.GAME_OVER);
     }
 
     private IEnumerator WaitForNextWave(float waitTime)
