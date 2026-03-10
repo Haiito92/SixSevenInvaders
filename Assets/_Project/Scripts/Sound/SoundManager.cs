@@ -2,14 +2,18 @@ using System;
 using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
+    [Header("Music Settings")]
     [SerializeField] private AudioSource m_musicSource;
     [SerializeField, Range(0.1f, 100.0f)] private float  m_musicFadeOutSpeed = 1.0f;
     [SerializeField, Range(0.1f, 100.0f)] private float  m_musicFadeInSpeed = 1.0f;
-    
     private Coroutine m_changeMusicCoroutine;
+    
+    [Header("SFX Settings")]
+    [SerializeField] private AudioMixerGroup m_sfxMixerGroup;
 
     #region Singleton
     
@@ -37,6 +41,7 @@ public class SoundManager : MonoBehaviour
         m_musicSource.volume = 0.0f;
     }
 
+    #region Music
     public void PlayMusic(AudioClip newMusic)
     {
         if(!m_musicSource) return;
@@ -94,16 +99,55 @@ public class SoundManager : MonoBehaviour
             m_changeMusicCoroutine = null;
         }
     }
+    #endregion
     
-    [Header("Tests")]
-    [SerializeField] private AudioClip m_testMusicClip;
-    [SerializeField] private AudioClip m_testMusicClip2;
+    #region SFX
 
-    [Button]
-    public void TestPlayMusic() => PlayMusic(m_testMusicClip);
-    [Button]
-    public void TestPlayMusic2() => PlayMusic(m_testMusicClip2);
-    [Button]
-    public void TestStopMusic() => StopMusic();
+    public void PlaySFX2D(AudioClip sfx, float volume = 1.0f, float pitch = 1.0f)
+    {
+        PlaySFX(sfx, transform.position, volume, pitch, 0.0f);   
+    }
+    
+    public void PlaySFX3D(AudioClip sfx, Vector3 position, float volume = 1.0f, float pitch = 1.0f)
+    {
+        PlaySFX(sfx, position, volume, pitch, 1.0f);   
+    }
+
+    private void PlaySFX(AudioClip sfx, Vector3 position, float volume = 1.0f, float pitch = 1.0f, float spatialBlend = 1.0f)
+    {
+        GameObject go = new GameObject("SFX");
+        go.transform.parent = transform;
+        go.transform.position =  position; 
+
+        AudioSource source = go.AddComponent<AudioSource>();
+        
+        source.clip = sfx;
+        source.outputAudioMixerGroup = m_sfxMixerGroup;
+        source.volume = volume;
+        source.pitch = pitch;
+        source.spatialBlend = spatialBlend;
+        
+        Destroy(go, sfx.length);
+        source.Play();
+    }
+    
+    #endregion
+    
+    // [Header("Tests")]
+    // [SerializeField] private AudioClip m_testMusicClip;
+    // [SerializeField] private AudioClip m_testMusicClip2;
+    // [SerializeField] private AudioClip m_testSFX;
+    //
+    // [Button]
+    // public void TestPlayMusic() => PlayMusic(m_testMusicClip);
+    // [Button]
+    // public void TestPlayMusic2() => PlayMusic(m_testMusicClip2);
+    // [Button]
+    // public void TestStopMusic() => StopMusic();
+    //
+    // [Button]
+    // public void TestPlaySFX2D() => PlaySFX2D(m_testSFX);
+    // [Button]
+    // public void TestPlaySFX3D() => PlaySFX3D(m_testSFX, new Vector3(-3.0f, 0.0f, -10.0f));
 
 }
