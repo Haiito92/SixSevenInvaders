@@ -43,9 +43,20 @@ public class GameManager : MonoBehaviour
     //UI
     [SerializeField] private GameObject MainMenuUI;
     [SerializeField] private GameObject EndMenuUI;
+    
+    //Player
+    [SerializeField] private Player currentPlayer;
 
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            return;
+        }
         Instance = this;
         currentGameState = GameState.MAIN_MENU;
         onGameStateChange += OnGameStateChange;
@@ -59,6 +70,8 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        currentPlayer.ResetPlayer();
+        StopAllCoroutines();
         SceneManager.LoadScene(1);
     }
 
@@ -84,6 +97,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GAME: //GameRunning main game WITH WAVE
                 StopCoroutine(_waitForWavesCoroutine);
+                Time.timeScale = 1f;
                 if (_indexOfPatterns < listOfPatterns.Count) SpawnWave(listOfPatterns[_indexOfPatterns]);
                 else
                 {
@@ -97,6 +111,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GAME_OVER: //EndGame if player dead OR lastWave is done
                 StopAllCoroutines();
+                Time.timeScale = 0f;
+                _indexOfPatterns = 0;
                 EndMenuUI.SetActive(true);
                 break;
             default:
@@ -180,7 +196,7 @@ public class GameManager : MonoBehaviour
     public void PlayGameOver()
     {
         Debug.Log("Game Over");
-        Time.timeScale = 0f;
+
         ChangeGameState(GameState.GAME_OVER);
     }
 

@@ -1103,6 +1103,7 @@ MonoBehaviour:
   - {fileID: 7542242248972639614, guid: cfea72d8ee851db41858cca0c7c97187, type: 3}
   MainMenuUI: {fileID: 353107029}
   EndMenuUI: {fileID: 2027268102}
+  currentPlayer: {fileID: 582271454}
 --- !u!4 &879569044
 Transform:
   m_ObjectHideFlags: 0
