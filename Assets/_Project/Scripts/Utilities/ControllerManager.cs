@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +15,15 @@ public class ControllerManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
+    private void OnDisable()
+    {
+        _stopRumbleAfterTime = null;
     }
 
     public void RumblePulse(float lFrequency, float hFrequency, float duration)
@@ -36,6 +45,7 @@ public class ControllerManager : MonoBehaviour
         if (_currentPad != null)
         {
             _currentPad.SetMotorSpeeds(0.0f,0.0f);
+            
         }
     } 
     

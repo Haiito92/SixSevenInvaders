@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -55,6 +56,36 @@ public class Player : MonoBehaviour
             m_moveAction.action.started -= OnShoot;
         } 
     }
+    
+    private void OnDestroy()
+    {
+        if (m_moveAction)
+        {
+            m_moveAction.action.started -= OnMove;
+            m_moveAction.action.performed -= OnMove;
+            m_moveAction.action.canceled -= OnMove;
+        }
+        
+        if (m_shootAction)
+        {
+            m_moveAction.action.started -= OnShoot;
+        } 
+    }
+
+    public void ResetPlayer()
+    {
+        if (m_moveAction)
+        {
+            m_moveAction.action.started -= OnMove;
+            m_moveAction.action.performed -= OnMove;
+            m_moveAction.action.canceled -= OnMove;
+        }
+        
+        if (m_shootAction)
+        {
+            m_moveAction.action.started -= OnShoot;
+        } 
+    }
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
@@ -67,6 +98,8 @@ public class Player : MonoBehaviour
     {
         float delta = m_direction * m_speed * Time.deltaTime;
         transform.position = GameManager.Instance.KeepInBounds(transform.position + Vector3.right * delta);
+        Vector3 rotation = new Vector3(0.0f, 0.0f, -20.0f * m_direction);
+        transform.transform.DORotate(rotation, 0.2f);
     }
 
     private void OnShoot(InputAction.CallbackContext ctx)
