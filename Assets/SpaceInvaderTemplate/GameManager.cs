@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -31,18 +32,51 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameState currentGameState;
 
     [SerializeField] private List<GameObject> listOfPatterns;
-    private List<GameObject> listOfWaves;
+    private List<GameObject> _listOfWaves;
+    private int _indexOfPatterns = 0;
+
+    private IEnumerator _waitForWavesCoroutine;
 
     void Awake()
     {
         Instance = this;
         currentGameState = GameState.DEFAULT;
+        onGameStateChange += OnGameStateChange;
+        _waitForWavesCoroutine = WaitForNextWave(2.0f);
     }
 
     public void ChangeGameState(GameState newGameState)
     {
         currentGameState = newGameState;
         onGameStateChange?.Invoke();
+    }
+
+    private void OnGameStateChange()
+    {
+        switch (currentGameState)
+        {
+            case GameState.DEFAULT:
+                break;
+            case GameState.MAIN_MENU: //MainMenu 
+                break;
+            case GameState.GAME: //GameRunning main game WITH WAVE
+                StopCoroutine(_waitForWavesCoroutine);
+                if (_indexOfPatterns < listOfPatterns.Count) SpawnWave(listOfPatterns[_indexOfPatterns]);
+                else
+                {
+                    //END GAME it was last wave
+                    ChangeGameState(GameState.GAME_OVER);
+                }
+                break;
+            case GameState.WAVE_STANDBY: //Between 2 waves
+                StartCoroutine(_waitForWavesCoroutine);
+                _indexOfPatterns++;
+                break;
+            case GameState.GAME_OVER: //EndGame if player dead OR lastWave is done
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public void SpawnWave(GameObject wavePatern)
@@ -52,16 +86,16 @@ public class GameManager : MonoBehaviour
         if ( waveScript!= null)
         {
             waveScript.onWaveEnd += RemoveWaveFromList;
-            listOfWaves.Add(newWave);
+            _listOfWaves.Add(newWave);
         }
     }
 
     private void RemoveWaveFromList(GameObject obj)
     {
-        int indexOfObject = listOfWaves.IndexOf(obj);
-        if (listOfWaves.Contains(obj))
+        int indexOfObject = _listOfWaves.IndexOf(obj);
+        if (_listOfWaves.Contains(obj))
         {
-            listOfWaves.Remove(obj);
+            _listOfWaves.Remove(obj);
             Destroy(obj);
         }
         obj.GetComponent<Wave>().onWaveEnd -= RemoveWaveFromList;
@@ -123,6 +157,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         currentGameState = GameState.GAME_OVER;
     }
+
+    private IEnumerator WaitForNextWave(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ChangeGameState(GameState.GAME);
+    } 
 
     public void OnDrawGizmos()
     {
