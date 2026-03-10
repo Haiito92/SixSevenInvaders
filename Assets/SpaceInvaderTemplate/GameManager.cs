@@ -10,6 +10,7 @@ public enum GameState
 {
     DEFAULT,
     MAIN_MENU,
+    START_GAME,
     GAME,
     WAVE_STANDBY,
     GAME_OVER
@@ -32,17 +33,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameState currentGameState;
 
     [SerializeField] private List<GameObject> listOfPatterns;
-    private List<GameObject> _listOfWaves;
+    private List<GameObject> _listOfWaves = new List<GameObject>();
     private int _indexOfPatterns = 0;
 
     private IEnumerator _waitForWavesCoroutine;
+    
+    
+    //UI
+    [SerializeField] private GameObject MainMenuUI;
 
     void Awake()
     {
         Instance = this;
-        currentGameState = GameState.DEFAULT;
+        currentGameState = GameState.MAIN_MENU;
         onGameStateChange += OnGameStateChange;
         _waitForWavesCoroutine = WaitForNextWave(2.0f);
+    }
+
+    public void StartGame()
+    {
+        ChangeGameState(GameState.START_GAME);
     }
 
     public void ChangeGameState(GameState newGameState)
@@ -58,6 +68,10 @@ public class GameManager : MonoBehaviour
             case GameState.DEFAULT:
                 break;
             case GameState.MAIN_MENU: //MainMenu 
+                break;
+            case GameState.START_GAME:
+                MainMenuUI.SetActive(false);
+                ChangeGameState(GameState.GAME);
                 break;
             case GameState.GAME: //GameRunning main game WITH WAVE
                 StopCoroutine(_waitForWavesCoroutine);
@@ -88,6 +102,7 @@ public class GameManager : MonoBehaviour
             waveScript.onWaveEnd += RemoveWaveFromList;
             _listOfWaves.Add(newWave);
         }
+        waveScript.StartWave();
     }
 
     private void RemoveWaveFromList(GameObject obj)
