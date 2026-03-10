@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     
     //UI
     [SerializeField] private GameObject MainMenuUI;
+    [SerializeField] private GameObject EndMenuUI;
 
     void Awake()
     {
@@ -53,6 +54,11 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         ChangeGameState(GameState.START_GAME);
+    }
+
+    public void ResetGame()
+    {
+        ChangeGameState(GameState.MAIN_MENU);
     }
 
     public void ChangeGameState(GameState newGameState)
@@ -68,6 +74,8 @@ public class GameManager : MonoBehaviour
             case GameState.DEFAULT:
                 break;
             case GameState.MAIN_MENU: //MainMenu 
+                EndMenuUI.SetActive(false);
+                MainMenuUI.SetActive(true);
                 break;
             case GameState.START_GAME:
                 MainMenuUI.SetActive(false);
@@ -87,6 +95,8 @@ public class GameManager : MonoBehaviour
                 _indexOfPatterns++;
                 break;
             case GameState.GAME_OVER: //EndGame if player dead OR lastWave is done
+                StopAllCoroutines();
+                EndMenuUI.SetActive(true);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -170,7 +180,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         Time.timeScale = 0f;
-        currentGameState = GameState.GAME_OVER;
+        ChangeGameState(GameState.GAME_OVER);
     }
 
     private IEnumerator WaitForNextWave(float waitTime)

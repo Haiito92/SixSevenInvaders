@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionReference m_shootAction;
     
     [SerializeField] private float m_deadzone = 0.3f;
-    [SerializeField] private float m_speed = 1f;
+    [SerializeField] private float m_speed = 2f;
     private float m_direction = 0.0f;
     
     [SerializeField] private Bullet m_bulletPrefab = null;
@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
         {
             if (Time.time > m_lastShootTimestamp + m_shootCooldown )
             {
+                if (ControllerManager.Instance != null) ControllerManager.Instance.RumblePulse(0.5f, 0.8f, 0.1f);
                 Shoot();
             } 
         }
