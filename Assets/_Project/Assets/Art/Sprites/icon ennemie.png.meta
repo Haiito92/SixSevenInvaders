@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b0d5223e36e3a4b489346edbfa81a711
+guid: 6bfdfc40295a11b4b97e0380464346e9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -610781950421562054
-    second: icon Frutiger game_0
+      213: 1159719148061656267
+    second: icon ennemie_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icon Frutiger game_0
+      name: icon ennemie_0
       rect:
         serializedVersion: 2
-        x: 39
-        y: 40
-        width: 422
-        height: 420
+        x: 38
+        y: 36
+        width: 424
+        height: 424
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3d07e95d011687f0800000000000000
-      internalID: -610781950421562054
+      spriteID: bc40f63bb66281010800000000000000
+      internalID: 1159719148061656267
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icon Frutiger game_0: -610781950421562054
+      icon ennemie_0: 1159719148061656267
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
