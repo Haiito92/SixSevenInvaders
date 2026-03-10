@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Wave : MonoBehaviour
 {
@@ -47,7 +49,11 @@ public class Wave : MonoBehaviour
     List<Column> invaderPerColumn = new(); // Keeps track of invaders per column. A column will be removed if empty.
     List<Row> invaderPerRow = new(); // Keeps track of invaders per row. A row will be removed if empty.
 
-    void Awake()
+    public Action<GameObject> onWaveEnd;
+
+    private bool waveAsStarted = false;
+
+    public void StartWave()
     {
         shootCooldown = timeBeforeFirstShoot;
 
@@ -73,13 +79,17 @@ public class Wave : MonoBehaviour
                 invaderPerRow[j].invaders.Add(invader);
             }
         }
-        
+
+        waveAsStarted = true;
     }
 
     void Update()
     {
-        UpdateMovement();
-        UpdateShoot();
+        if (waveAsStarted)
+        {
+            UpdateMovement();
+            UpdateShoot();
+        }
     }
 
     private void UpdateShoot()
@@ -100,8 +110,6 @@ public class Wave : MonoBehaviour
 
     void UpdateMovement()
     {
-        if(invaders.Count <= 0) { return; }
-
         // Speed depends on remaining invaders ratio
         float t = 1f - (invaders.Count - 1) / (float)((rows * columns) - 1);
         float speed = Mathf.Lerp(speedMin, speedMax, difficultyProgress.Evaluate(t));
@@ -213,6 +221,13 @@ public class Wave : MonoBehaviour
             {
                 invaderPerRow[indexRow] = row;
             }
+        }
+        
+        
+        //End Game
+        if(invaders.Count <= 0)
+        {
+            onWaveEnd?.Invoke(gameObject);
         }
     }
 
