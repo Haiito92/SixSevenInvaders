@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,10 +11,12 @@ public class ScoreManager : MonoBehaviour
     private UInt64 m_score;
     [SerializeField] private List<UInt64> m_highScores;
     private int m_highScoreMaxAmount = 5;
+    
     #endregion
 
     #region Properties
     public UInt64 Score => m_score;
+    private static string SavePath => Path.Combine(Application.persistentDataPath, "HighScores.json");
     #endregion
 
     #region Actions
@@ -49,6 +52,9 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         InitSingleton();
+        
+        m_highScores =  new List<UInt64>();
+        LoadHighScores();
     }
     
     public void AddScore(UInt64 scoreToAdd)
@@ -116,13 +122,11 @@ public class ScoreManager : MonoBehaviour
                 m_highScores.Insert(low, newHighScore);
                 highScoreChanged = true;
             }
-            
-            if(low < m_highScoreMaxAmount)
+            else if(low < m_highScoreMaxAmount)
             {
                 m_highScores.Add(newHighScore);
                 highScoreChanged = true;
             }
-            
         }
 
         int currentCount = m_highScores.Count;
@@ -133,26 +137,40 @@ public class ScoreManager : MonoBehaviour
 
         if (highScoreChanged)
         {
-            SaveScore();
+            SaveHighScores();
         }
     }
     
-    private void SaveScore()
+    private void SaveHighScores()
     {
+        ScoreSave save = new ScoreSave { highScores = m_highScores };
         
+        string json = JsonUtility.ToJson(save, true);
+        File.WriteAllText(SavePath,  json);
     }
 
-    private void LoadScore()
+    private void LoadHighScores()
     {
+        if (!File.Exists(SavePath)) return;
         
+        string json = File.ReadAllText(SavePath);
+        ScoreSave save = JsonUtility.FromJson<ScoreSave>(json);
+        m_highScores = save.highScores;
     }
 
-    #region Tests
-    [Header("Test Scores")] 
-    [SerializeField] private UInt64 m_testHighScoreToAdd;
-
-    [Button]
-    public void AddTestHighScore() => AddNewHighScore(m_testHighScoreToAdd);
-
-    #endregion
+    private struct ScoreSave
+    {
+        public List<UInt64> highScores;
+    }
+    
+    // #region Tests
+    // [Header("Test Scores")] 
+    // [SerializeField] private UInt64 m_testHighScoreToAdd;
+    //
+    // [Button]
+    // public void AddTestHighScore() => AddNewHighScore(m_testHighScoreToAdd);
+    // [Button]
+    // public void TestLoadHighScores() => LoadHighScores();
+    //
+    // #endregion
 }
