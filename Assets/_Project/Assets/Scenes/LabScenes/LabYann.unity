@@ -154,6 +154,7 @@ MonoBehaviour:
   listOfPatterns: []
   MainMenuUI: {fileID: 0}
   EndMenuUI: {fileID: 0}
+  currentPlayer: {fileID: 0}
 --- !u!4 &434838715
 Transform:
   m_ObjectHideFlags: 0
@@ -830,9 +831,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2315353507675654377, guid: 9a00daaff3a340e479682d713c3355ef, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8bc7852dd27ac8a4a8a64d9d68e0309e, type: 2}
+    - target: {fileID: 5218920139218483042, guid: 9a00daaff3a340e479682d713c3355ef, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7100495790084351138, guid: 9a00daaff3a340e479682d713c3355ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8227220803834803582, guid: 9a00daaff3a340e479682d713c3355ef, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8541595308675539925, guid: 9a00daaff3a340e479682d713c3355ef, type: 3}
       propertyPath: m_Name
