@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject MainMenuUI;
     [SerializeField] private GameObject EndMenuUI;
+    [SerializeField] private HighScoresUI HighScoresUI;
     
     //Player
     [Header("Player")]
@@ -139,7 +140,16 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0f;
                 _indexOfPatterns = 0;
                 currentPlayer.ResetPlayer();
+
+                if (ScoreManager.Instance)
+                {
+                    ScoreManager.Instance.AddGameScoreToHighScores();
+                    ScoreManager.Instance.ResetScore();
+                }
+                
                 EndMenuUI.SetActive(true);
+                HighScoresUI?.UpdateHighScoresUI();
+                
                 SoundManager.Instance.StopMusic();
                 SoundManager.Instance.PlayMusic(highScoreMusic);
                 break;

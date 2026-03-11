@@ -52,9 +52,16 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         InitSingleton();
+
+        ResetManager();
         
-        m_highScores =  new List<UInt64>();
         LoadHighScores();
+    }
+    
+    private void ResetManager()
+    {
+        ResetScore();
+        m_highScores =  new List<UInt64>();
     }
     
     public void AddScore(UInt64 scoreToAdd)
@@ -81,7 +88,16 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-
+    public void ResetScore()
+    {
+        m_score = 0;
+    }
+    
+    public void AddGameScoreToHighScores()
+    {
+        AddNewHighScore(m_score);
+    }
+    
     public void AddNewHighScore(UInt64 newHighScore)
     {
         bool highScoreChanged = false;
