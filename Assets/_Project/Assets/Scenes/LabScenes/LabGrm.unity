@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 338789179}
   - component: {fileID: 338789181}
   - component: {fileID: 338789180}
+  - component: {fileID: 338789182}
   m_Layer: 5
   m_Name: MainMenuLogo
   m_TagString: Untagged
@@ -465,6 +466,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338789178}
   m_CullTransparentMesh: 1
+--- !u!95 &338789182
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338789178}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ae050ab28e16104b83ec8d1a56fbd1f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &353107029
 GameObject:
   m_ObjectHideFlags: 0
