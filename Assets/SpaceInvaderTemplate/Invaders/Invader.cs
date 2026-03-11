@@ -14,6 +14,8 @@ public class Invader : MonoBehaviour
     internal Action<Invader> onDestroy;
     [SerializeField] internal UnityEvent m_onDestroyUnityEvent;
 
+    [SerializeField] private GameObject m_onHitParticle;
+
     public Vector2Int GridIndex { get; private set; }
 
     private void Awake()
@@ -37,8 +39,18 @@ public class Invader : MonoBehaviour
     {
         if(collision.gameObject.tag != collideWithTag) { return; }
 
-        Destroy(gameObject);
+        GameObject hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
+        StartCoroutine(DeathTimer(1.0f, hitParticle));
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
         Destroy(collision.gameObject);
+    }
+
+    IEnumerator DeathTimer(float timerDeath, GameObject hitParticle)
+    {
+        yield return new WaitForSeconds(timerDeath);
+        Destroy(hitParticle);
+        Destroy(gameObject);
     }
 
     public void Shoot()

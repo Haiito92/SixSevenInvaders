@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     internal Action onGameStateChange;
 
+    [Header("GameManager Data")]
+
     [SerializeField] private Vector2 bounds;
     private Bounds Bounds => new Bounds(transform.position, new Vector3(bounds.x, bounds.y, 1000f));
 
@@ -41,11 +43,18 @@ public class GameManager : MonoBehaviour
     
     
     //UI
+    [Header("UI")]
     [SerializeField] private GameObject MainMenuUI;
     [SerializeField] private GameObject EndMenuUI;
     
     //Player
+    [Header("Player")]
     [SerializeField] private Player currentPlayer;
+
+    [Header("Sounds / Music")]
+    [SerializeField] private AudioClip mainMenuMusic;
+    [SerializeField] private AudioClip gameMusic;
+    [SerializeField] private AudioClip HighScoreMusic;
 
     void Awake()
     {
