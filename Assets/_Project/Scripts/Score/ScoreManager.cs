@@ -9,13 +9,15 @@ public class ScoreManager : MonoBehaviour
 {
     #region Fields
     private UInt64 m_score;
-    [SerializeField] private List<UInt64> m_highScores;
+    private List<UInt64> m_highScores;
     private int m_highScoreMaxAmount = 5;
     
     #endregion
 
     #region Properties
     public UInt64 Score => m_score;
+    public List<UInt64>  HighScores => m_highScores;
+    
     private static string SavePath => Path.Combine(Application.persistentDataPath, "HighScores.json");
     #endregion
 
@@ -29,8 +31,6 @@ public class ScoreManager : MonoBehaviour
     // UInt64 is removed score
     public event Action<UInt64> ScoreRemoved; 
     #endregion
-    
-    
     
     #region Singleton
     private static ScoreManager m_instance;
