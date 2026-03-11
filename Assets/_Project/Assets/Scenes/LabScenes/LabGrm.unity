@@ -1761,6 +1761,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8103578247608449748, guid: ef2c1c081bc441c47a658ce83f64ef58, type: 3}
+      propertyPath: m_shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7f88b5afd264cb64b83c2ac7eb3e9f0f, type: 3}
     - target: {fileID: 8213566863375726970, guid: ef2c1c081bc441c47a658ce83f64ef58, type: 3}
       propertyPath: m_Camera
       value: 
