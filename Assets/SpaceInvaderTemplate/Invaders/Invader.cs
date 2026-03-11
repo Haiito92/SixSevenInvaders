@@ -38,6 +38,7 @@ public class Invader : MonoBehaviour
     private void Start()
     {
         Vector3 targetScale = transform.localScale + m_scaleSquashOffset;
+        m_squashTweener?.Kill();
         m_squashTweener = transform.DOScale(targetScale, m_squashAnimDuration / 2)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine);
@@ -46,7 +47,7 @@ public class Invader : MonoBehaviour
     public void OnDestroy()
     {
         
-        if(m_squashTweener != null) m_squashTweener.Kill();
+        m_squashTweener?.Kill();
         if (GameManager.Instance == null) return;
         m_onDestroyUnityEvent.Invoke();
         ScoreManager.Instance?.AddScore(m_scoreOnDeath);

@@ -126,6 +126,7 @@ public class SoundManager : MonoBehaviour
         source.volume = volume;
         source.pitch = pitch;
         source.spatialBlend = spatialBlend;
+        source.rolloffMode = AudioRolloffMode.Linear;
         
         Destroy(go, sfx.length);
         source.Play();
