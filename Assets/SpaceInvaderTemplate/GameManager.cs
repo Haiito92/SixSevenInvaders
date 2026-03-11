@@ -17,7 +17,7 @@ public enum GameState
     GAME_OVER
 }
 
-[DefaultExecutionOrder(-100)]
+
 public class GameManager : MonoBehaviour
 {
     public enum DIRECTION { Right = 0, Up = 1, Left = 2, Down = 3 }
@@ -58,14 +58,14 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            return;
-        }
+        // if (Instance != null)
+        // {
+        //     Instance = this;
+        // }
+        // else
+        // {
+        //     return;
+        // }
         Instance = this;
         currentGameState = GameState.MAIN_MENU;
         onGameStateChange += OnGameStateChange;
@@ -81,7 +81,19 @@ public class GameManager : MonoBehaviour
     {
         currentPlayer.ResetPlayer();
         StopAllCoroutines();
+        if(onGameStateChange != null) onGameStateChange -= OnGameStateChange;
         SceneManager.LoadScene(1);
+    }
+
+    private void OnDestroy()
+    {
+        if(onGameStateChange != null) onGameStateChange -= OnGameStateChange;
+    }
+
+    public void QuitGame()
+    {
+        if(onGameStateChange != null) onGameStateChange -= OnGameStateChange;
+        QuitGame();
     }
 
     public void ChangeGameState(GameState newGameState)
@@ -122,6 +134,7 @@ public class GameManager : MonoBehaviour
                 StopAllCoroutines();
                 Time.timeScale = 0f;
                 _indexOfPatterns = 0;
+                currentPlayer.ResetPlayer();
                 EndMenuUI.SetActive(true);
                 break;
             default:

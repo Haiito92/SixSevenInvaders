@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         
         if (m_shootAction)
         {
-            m_moveAction.action.started -= OnShoot;
+            m_shootAction.action.started -= OnShoot;
         } 
     }
     
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
         
         if (m_shootAction)
         {
-            m_moveAction.action.started -= OnShoot;
+            m_shootAction.action.started -= OnShoot;
         } 
     }
 
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         
         if (m_shootAction)
         {
-            m_moveAction.action.started -= OnShoot;
+            m_shootAction.action.started -= OnShoot;
         } 
     }
 
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         float delta = m_direction * m_speed * Time.deltaTime;
         transform.position = GameManager.Instance.KeepInBounds(transform.position + Vector3.right * delta);
         Vector3 rotation = new Vector3(0.0f, 0.0f, -20.0f * m_direction);
-        transform.DORotate(rotation, 0.2f);
+        //transform.DORotate(rotation, 0.2f);
     }
 
     private void OnShoot(InputAction.CallbackContext ctx)
@@ -125,10 +125,10 @@ public class Player : MonoBehaviour
         Instantiate(m_bulletPrefab, m_shootAt.position, Quaternion.identity);
         GameObject nuzzle = Instantiate(m_nuzzleParticleEffect, m_shootAt.position, Quaternion.identity);
         StartCoroutine(NuzzleDeath(nuzzle));
-        transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
-        {
-            transform.DOScaleY(0.5f, 0.1f);
-        });
+        // transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
+        // {
+        //     transform.DOScaleY(0.5f, 0.1f);
+        // });
 
         m_lastShootTimestamp = Time.time;
     }
