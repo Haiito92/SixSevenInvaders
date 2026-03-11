@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         
         if (m_shootAction)
         {
-            m_moveAction.action.started -= OnShoot;
+            m_shootAction.action.started -= OnShoot;
         } 
     }
     
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
         
         if (m_shootAction)
         {
-            m_moveAction.action.started -= OnShoot;
+            m_shootAction.action.started -= OnShoot;
         } 
     }
 
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         
         if (m_shootAction)
         {
-            m_moveAction.action.started -= OnShoot;
+            m_shootAction.action.started -= OnShoot;
         } 
     }
 

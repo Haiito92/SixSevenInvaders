@@ -15,13 +15,9 @@ public class Invader : MonoBehaviour
     [SerializeField] internal UnityEvent m_onDestroyUnityEvent;
 
     [SerializeField] private GameObject m_onHitParticle;
+    [SerializeField] private GameObject m_onDieParticle;
 
     public Vector2Int GridIndex { get; private set; }
-
-    private void Awake()
-    {
-        m_onDestroyUnityEvent.AddListener(() => { onDestroy.Invoke(this); });
-    }
 
     public void Initialize(Vector2Int gridIndex)
     {
@@ -40,16 +36,19 @@ public class Invader : MonoBehaviour
         if(collision.gameObject.tag != collideWithTag) { return; }
 
         GameObject hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
-        StartCoroutine(DeathTimer(1.0f, hitParticle));
+        GameObject deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
+        onDestroy?.Invoke(this);
+        StartCoroutine(DeathTimer(1.0f, hitParticle, deathParticle));
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
         Destroy(collision.gameObject);
     }
 
-    IEnumerator DeathTimer(float timerDeath, GameObject hitParticle)
+    IEnumerator DeathTimer(float timerDeath, GameObject hitParticle, GameObject deathParticle)
     {
         yield return new WaitForSeconds(timerDeath);
         Destroy(hitParticle);
+        Destroy(deathParticle);
         Destroy(gameObject);
     }
 
