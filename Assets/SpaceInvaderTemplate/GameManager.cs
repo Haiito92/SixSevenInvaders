@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
         //     return;
         // }
         Instance = this;
-        currentGameState = GameState.MAIN_MENU;
         onGameStateChange += OnGameStateChange;
+        ChangeGameState(GameState.MAIN_MENU);
         _waitForWavesCoroutine = WaitForNextWave(2.0f);
     }
 
