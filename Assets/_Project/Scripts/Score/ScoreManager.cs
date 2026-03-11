@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,6 +8,8 @@ public class ScoreManager : MonoBehaviour
 {
     #region Fields
     private UInt64 m_score;
+    [SerializeField] private List<UInt64> m_highScores;
+    private int m_highScoreMaxAmount = 5;
     #endregion
 
     #region Properties
@@ -71,8 +75,84 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void SaveScore()
+
+    public void AddNewHighScore(UInt64 newHighScore)
     {
-        //TODO
+        bool highScoreChanged = false;
+        
+        if (m_highScores.Count == 0)
+        {
+            m_highScores.Add(newHighScore);
+            highScoreChanged = true;
+        }
+        else if (m_highScores.Count == 1)
+        {
+            if (m_highScores[0] > newHighScore)
+                m_highScores.Add(newHighScore);
+            else
+                m_highScores.Insert(0, newHighScore);
+        }
+        else
+        {
+            int low = 0;
+            int high = m_highScores.Count;
+
+            while (low < high)
+            {
+                int mid = ((high - low) / 2) + low;
+
+                if (m_highScores[mid] > newHighScore)
+                {
+                    low = mid + 1;
+                }
+                else
+                {
+                    high = mid;
+                }
+            }
+
+            if (low < m_highScores.Count)
+            {
+                m_highScores.Insert(low, newHighScore);
+                highScoreChanged = true;
+            }
+            
+            if(low < m_highScoreMaxAmount)
+            {
+                m_highScores.Add(newHighScore);
+                highScoreChanged = true;
+            }
+            
+        }
+
+        int currentCount = m_highScores.Count;
+        for (int i = currentCount - 1; i > m_highScoreMaxAmount - 1; i--)
+        {
+            m_highScores.RemoveAt(i);
+        }
+
+        if (highScoreChanged)
+        {
+            SaveScore();
+        }
     }
+    
+    private void SaveScore()
+    {
+        
+    }
+
+    private void LoadScore()
+    {
+        
+    }
+
+    #region Tests
+    [Header("Test Scores")] 
+    [SerializeField] private UInt64 m_testHighScoreToAdd;
+
+    [Button]
+    public void AddTestHighScore() => AddNewHighScore(m_testHighScoreToAdd);
+
+    #endregion
 }
