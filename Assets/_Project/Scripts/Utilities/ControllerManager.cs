@@ -15,14 +15,17 @@ public class ControllerManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
+        // if (Instance == null)
+        // {
+        //     Instance = this;
+        // }
+        Instance = this;
     }
 
     private void OnDisable()
     {
+        if (_stopRumbleAfterTime != null) StopCoroutine(_stopRumbleAfterTime);
+        _currentPad.SetMotorSpeeds(0.0f,0.0f);
         _stopRumbleAfterTime = null;
     }
 

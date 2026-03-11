@@ -14,12 +14,13 @@ public class Invader : MonoBehaviour
     internal Action<Invader> onDestroy;
     [SerializeField] internal UnityEvent m_onDestroyUnityEvent;
 
-    public Vector2Int GridIndex { get; private set; }
+    [Header("Particle Effect")]
+    [SerializeField] private GameObject m_onHitParticle;
+    [SerializeField] private GameObject m_onDieParticle;
+    [SerializeField] private GameObject m_explosionRippleParticleEffect;
 
-    private void Awake()
-    {
-        m_onDestroyUnityEvent.AddListener(() => { onDestroy.Invoke(this); });
-    }
+
+    public Vector2Int GridIndex { get; private set; }
 
     public void Initialize(Vector2Int gridIndex)
     {
@@ -37,8 +38,22 @@ public class Invader : MonoBehaviour
     {
         if(collision.gameObject.tag != collideWithTag) { return; }
 
-        Destroy(gameObject);
+        GameObject hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
+        GameObject deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
+        GameObject deathRipple = Instantiate(m_explosionRippleParticleEffect, transform.position, Quaternion.identity);
+        onDestroy?.Invoke(this);
+        StartCoroutine(DeathTimer(1.0f, hitParticle, deathParticle));
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
         Destroy(collision.gameObject);
+    }
+
+    IEnumerator DeathTimer(float timerDeath, GameObject hitParticle, GameObject deathParticle)
+    {
+        yield return new WaitForSeconds(timerDeath);
+        Destroy(hitParticle);
+        Destroy(deathParticle);
+        Destroy(gameObject);
     }
 
     public void Shoot()

@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform m_shootAt = null;
     [SerializeField] private float m_shootCooldown = 1f;
     [SerializeField] private string m_collideWithTag = "Untagged";
+
+    [SerializeField] private AudioClip m_shootSound;
+
+    [Header("Particle Effect")]
+    [SerializeField] private GameObject m_nuzzleParticleEffect;
 
     private float m_lastShootTimestamp = Mathf.NegativeInfinity;
 
@@ -53,7 +59,7 @@ public class Player : MonoBehaviour
         
         if (m_shootAction)
         {
-            m_moveAction.action.started -= OnShoot;
+            m_shootAction.action.started -= OnShoot;
         } 
     }
     
@@ -68,7 +74,7 @@ public class Player : MonoBehaviour
         
         if (m_shootAction)
         {
-            m_moveAction.action.started -= OnShoot;
+            m_shootAction.action.started -= OnShoot;
         } 
     }
 
@@ -83,7 +89,7 @@ public class Player : MonoBehaviour
         
         if (m_shootAction)
         {
-            m_moveAction.action.started -= OnShoot;
+            m_shootAction.action.started -= OnShoot;
         } 
     }
 
@@ -109,6 +115,7 @@ public class Player : MonoBehaviour
             if (Time.time > m_lastShootTimestamp + m_shootCooldown )
             {
                 if (ControllerManager.Instance != null) ControllerManager.Instance.RumblePulse(0.5f, 0.8f, 0.1f);
+                SoundManager.Instance.PlaySFX3D(m_shootSound, transform.position, 1.0f, Random.Range(0.8f,1.2f));
                 Shoot();
             } 
         }
@@ -117,12 +124,20 @@ public class Player : MonoBehaviour
     void Shoot()
     {
         Instantiate(m_bulletPrefab, m_shootAt.position, Quaternion.identity);
+        GameObject nuzzle = Instantiate(m_nuzzleParticleEffect, m_shootAt.position, Quaternion.identity);
+        StartCoroutine(NuzzleDeath(nuzzle));
         transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
         {
             transform.DOScaleY(0.5f, 0.1f);
         });
 
         m_lastShootTimestamp = Time.time;
+    }
+
+    IEnumerator NuzzleDeath(GameObject nuzzleParticle)
+    {
+        yield return new WaitForSeconds(1.0f);
+        Destroy(nuzzleParticle);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
