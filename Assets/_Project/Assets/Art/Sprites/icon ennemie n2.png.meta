@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 91bb7703026498144801373c12377c9f
+guid: 9c2dd17535a4c8f40b1168ac85ef5234
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6238348786514918896
-    second: icon valid 1_0
+      213: 1138807836267856820
+    second: icon ennemie n2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icon valid 1_0
+      name: icon ennemie n2_0
       rect:
         serializedVersion: 2
         x: 38
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0120ac2b4deec69a0800000000000000
-      internalID: -6238348786514918896
+      spriteID: 4b34d2481bbddcf00800000000000000
+      internalID: 1138807836267856820
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icon valid 1_0: -6238348786514918896
+      icon ennemie n2_0: 1138807836267856820
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
