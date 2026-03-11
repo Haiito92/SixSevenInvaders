@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private AudioClip m_shootSound;
 
+    [Header("Particle Effect")]
     [SerializeField] private GameObject m_nuzzleParticleEffect;
 
     private float m_lastShootTimestamp = Mathf.NegativeInfinity;

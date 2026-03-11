@@ -14,8 +14,11 @@ public class Invader : MonoBehaviour
     internal Action<Invader> onDestroy;
     [SerializeField] internal UnityEvent m_onDestroyUnityEvent;
 
+    [Header("Particle Effect")]
     [SerializeField] private GameObject m_onHitParticle;
     [SerializeField] private GameObject m_onDieParticle;
+    [SerializeField] private GameObject m_explosionRippleParticleEffect;
+
 
     public Vector2Int GridIndex { get; private set; }
 
@@ -37,6 +40,7 @@ public class Invader : MonoBehaviour
 
         GameObject hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
         GameObject deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
+        GameObject deathRipple = Instantiate(m_explosionRippleParticleEffect, transform.position, Quaternion.identity);
         onDestroy?.Invoke(this);
         StartCoroutine(DeathTimer(1.0f, hitParticle, deathParticle));
         GetComponent<BoxCollider2D>().enabled = false;

@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject MainMenuUI;
     [SerializeField] private GameObject EndMenuUI;
+    [SerializeField] private HighScoresUI HighScoresUI;
     
     //Player
     [Header("Player")]
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
     [Header("Sounds / Music")]
     [SerializeField] private AudioClip mainMenuMusic;
     [SerializeField] private AudioClip gameMusic;
-    [SerializeField] private AudioClip HighScoreMusic;
+    [SerializeField] private AudioClip highScoreMusic;
 
     void Awake()
     {
@@ -111,10 +112,14 @@ public class GameManager : MonoBehaviour
             case GameState.MAIN_MENU: //MainMenu 
                 EndMenuUI.SetActive(false);
                 MainMenuUI.SetActive(true);
+                SoundManager.Instance.StopMusic();
+                SoundManager.Instance.PlayMusic(mainMenuMusic);
                 break;
             case GameState.START_GAME:
                 MainMenuUI.SetActive(false);
                 ChangeGameState(GameState.GAME);
+                SoundManager.Instance.StopMusic();
+                SoundManager.Instance.PlayMusic(gameMusic);
                 break;
             case GameState.GAME: //GameRunning main game WITH WAVE
                 StopCoroutine(_waitForWavesCoroutine);
@@ -135,7 +140,18 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0f;
                 _indexOfPatterns = 0;
                 currentPlayer.ResetPlayer();
+
+                if (ScoreManager.Instance)
+                {
+                    ScoreManager.Instance.AddGameScoreToHighScores();
+                    ScoreManager.Instance.ResetScore();
+                }
+                
                 EndMenuUI.SetActive(true);
+                HighScoresUI?.UpdateHighScoresUI();
+                
+                SoundManager.Instance.StopMusic();
+                SoundManager.Instance.PlayMusic(highScoreMusic);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
