@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        ChangeGameState(GameState.START_GAME);
+        StartCoroutine(MainMenuToGameTransition());
     }
 
     public void ResetGame()
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
         currentPlayer.ResetPlayer();
         StopAllCoroutines();
         if(onGameStateChange != null) onGameStateChange -= OnGameStateChange;
-        SceneManager.LoadScene(1);
+        StartCoroutine(EndMenuToMainMenu());
     }
 
     private void OnDestroy()
@@ -125,10 +126,10 @@ public class GameManager : MonoBehaviour
                 ChangeGameState(GameState.GAME);
                 SoundManager.Instance.StopMusic();
                 SoundManager.Instance.PlayMusic(gameMusic);
+                Time.timeScale = 1f;
                 break;
             case GameState.GAME: //GameRunning main game WITH WAVE
                 StopCoroutine(_waitForWavesCoroutine);
-                Time.timeScale = 1f;
                 if (_indexOfPatterns < listOfPatterns.Count) SpawnWave(listOfPatterns[_indexOfPatterns]);
                 else
                 {
@@ -142,7 +143,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GAME_OVER: //EndGame if player dead OR lastWave is done
                 StopAllCoroutines();
-                Time.timeScale = 0f;
+                Time.timeScale = 1f;
                 _indexOfPatterns = 0;
                 currentPlayer.ResetPlayer();
 
@@ -239,7 +240,6 @@ public class GameManager : MonoBehaviour
     public void PlayGameOver()
     {
         Debug.Log("Game Over");
-
         ChangeGameState(GameState.GAME_OVER);
     }
 
@@ -258,5 +258,19 @@ public class GameManager : MonoBehaviour
         Gizmos.DrawLine(
             transform.position + Vector3.up * (gameOverHeight - bounds.y * 0.5f) - Vector3.right * bounds.x * 0.5f,
             transform.position + Vector3.up * (gameOverHeight - bounds.y * 0.5f) + Vector3.right * bounds.x * 0.5f);
+    }
+
+    IEnumerator MainMenuToGameTransition()
+    {
+        MainMenuUI.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(2f);
+        ChangeGameState(GameState.START_GAME);
+    }
+    
+    
+    IEnumerator EndMenuToMainMenu()
+    {
+        yield return new WaitForSeconds(1.2f);
+        SceneManager.LoadScene(1);
     }
 }
