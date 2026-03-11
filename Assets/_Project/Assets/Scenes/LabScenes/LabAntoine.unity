@@ -157,7 +157,7 @@ MonoBehaviour:
   currentPlayer: {fileID: 0}
   mainMenuMusic: {fileID: 0}
   gameMusic: {fileID: 0}
-  HighScoreMusic: {fileID: 0}
+  highScoreMusic: {fileID: 0}
 --- !u!4 &434838715
 Transform:
   m_ObjectHideFlags: 0
@@ -1092,11 +1092,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8112962264257766266, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.59875
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8112962264257766266, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.86911
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8112962264257766266, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1129,6 +1129,34 @@ PrefabInstance:
     - target: {fileID: 8112962264257766266, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: m_testHighScoreToAdd
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: m_highScores.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[0]'
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[1]'
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[2]'
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[3]'
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[4]'
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1298,11 +1326,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7257975768633832822, guid: 79123924c3b1f4a478044f007823ae4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.32959
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7257975768633832822, guid: 79123924c3b1f4a478044f007823ae4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6055
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7257975768633832822, guid: 79123924c3b1f4a478044f007823ae4a, type: 3}
       propertyPath: m_LocalPosition.z
