@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private AudioClip m_shootSound;
 
+    [SerializeField] private GameObject m_nuzzleParticleEffect;
+
     private float m_lastShootTimestamp = Mathf.NegativeInfinity;
 
     private void OnEnable()
@@ -121,12 +123,20 @@ public class Player : MonoBehaviour
     void Shoot()
     {
         Instantiate(m_bulletPrefab, m_shootAt.position, Quaternion.identity);
+        GameObject nuzzle = Instantiate(m_nuzzleParticleEffect, m_shootAt.position, Quaternion.identity);
+        StartCoroutine(NuzzleDeath(nuzzle));
         transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
         {
             transform.DOScaleY(0.5f, 0.1f);
         });
 
         m_lastShootTimestamp = Time.time;
+    }
+
+    IEnumerator NuzzleDeath(GameObject nuzzleParticle)
+    {
+        yield return new WaitForSeconds(1.0f);
+        Destroy(nuzzleParticle);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
