@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -23,13 +22,15 @@ public class Invader : MonoBehaviour
 
     [Header("SFX")] [SerializeField] private AudioClip m_onDieAudio;
 
-    // DOTween
-    [SerializeField] private Vector3 m_scaleSquashOffset;
-    [SerializeField, Range(0.1f, 100.0f)] private float m_squashAnimDuration = 1.0f;
-    private Tweener m_squashTweener;
-
+    // Tweening
     private Vector2 m_pivot;
     [SerializeField] private float m_offsetRadius;
+    [SerializeField] private float m_offsetMoveSpeed = 1.0f;
+    
+    private Vector2 m_originalScale;
+    [SerializeField] private Vector2 m_squashPower;
+    [SerializeField, Range(0.01f, 100.0f)] private float m_squashSpeed = 2.0f;
+    
     private float m_randomCosOffset;
     private float m_randomSinOffset;
     
@@ -42,29 +43,34 @@ public class Invader : MonoBehaviour
 
     private void Start()
     {
-        Vector3 targetScale = transform.localScale + m_scaleSquashOffset;
-        m_squashTweener?.Kill();
-        m_squashTweener = transform.DOScale(targetScale, m_squashAnimDuration / 2)
-            .SetLoops(-1, LoopType.Yoyo)
-            .SetEase(Ease.InOutSine);
-        
         m_randomCosOffset = Random.Range(-1.0f, 1.0f);
         m_randomSinOffset = Random.Range(-1.0f, 1.0f);
         m_pivot = transform.localPosition;
+        m_originalScale = transform.localScale;
     }
 
     private void Update()
     {
-        Vector2 offset = new Vector2(Mathf.Cos(Time.time + m_randomCosOffset), Mathf.Sin(Time.time + m_randomSinOffset));
+        Vector2 offset = new Vector2(
+            Mathf.Cos((Time.time + m_randomCosOffset) * Mathf.PI / m_offsetMoveSpeed), 
+            Mathf.Sin((Time.time + m_randomSinOffset) * Mathf.PI / m_offsetMoveSpeed));
         offset *= m_offsetRadius;
         
         transform.localPosition = m_pivot + offset;
+        
+        float x = m_squashPower.x * Mathf.PingPong((Time.time + m_randomCosOffset) / 2 / m_squashSpeed, 1);
+        float y = m_squashPower.y * Mathf.PingPong((Time.time + m_randomCosOffset) / 2 / m_squashSpeed, 1);
+
+        Vector2 scale = new Vector2(
+            Mathf.Max(m_originalScale.x - x, Mathf.Epsilon),
+            Mathf.Max(m_originalScale.y - y, Mathf.Epsilon));
+        transform.localScale = scale;
+        
     }
 
     public void OnDestroy()
     {
         
-        m_squashTweener?.Kill();
         if (GameManager.Instance == null) return;
         m_onDestroyUnityEvent.Invoke();
         ScoreManager.Instance?.AddScore(m_scoreOnDeath);
