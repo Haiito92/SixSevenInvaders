@@ -28,6 +28,7 @@ public class Invader : MonoBehaviour
 
     public void OnDestroy()
     {
+        if (GameManager.Instance == null) return;
         m_onDestroyUnityEvent.Invoke();
         ScoreManager.Instance?.AddScore(m_scoreOnDeath);
     }

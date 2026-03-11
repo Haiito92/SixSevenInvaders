@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionReference m_shootAction;
     
     [SerializeField] private float m_deadzone = 0.3f;
-    [SerializeField] private float m_speed = 1f;
+    [SerializeField] private float m_speed = 2f;
     private float m_direction = 0.0f;
     
     [SerializeField] private Bullet m_bulletPrefab = null;
@@ -55,6 +56,36 @@ public class Player : MonoBehaviour
             m_moveAction.action.started -= OnShoot;
         } 
     }
+    
+    private void OnDestroy()
+    {
+        if (m_moveAction)
+        {
+            m_moveAction.action.started -= OnMove;
+            m_moveAction.action.performed -= OnMove;
+            m_moveAction.action.canceled -= OnMove;
+        }
+        
+        if (m_shootAction)
+        {
+            m_moveAction.action.started -= OnShoot;
+        } 
+    }
+
+    public void ResetPlayer()
+    {
+        if (m_moveAction)
+        {
+            m_moveAction.action.started -= OnMove;
+            m_moveAction.action.performed -= OnMove;
+            m_moveAction.action.canceled -= OnMove;
+        }
+        
+        if (m_shootAction)
+        {
+            m_moveAction.action.started -= OnShoot;
+        } 
+    }
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
@@ -67,6 +98,8 @@ public class Player : MonoBehaviour
     {
         float delta = m_direction * m_speed * Time.deltaTime;
         transform.position = GameManager.Instance.KeepInBounds(transform.position + Vector3.right * delta);
+        Vector3 rotation = new Vector3(0.0f, 0.0f, -20.0f * m_direction);
+        transform.DORotate(rotation, 0.2f);
     }
 
     private void OnShoot(InputAction.CallbackContext ctx)
@@ -75,6 +108,7 @@ public class Player : MonoBehaviour
         {
             if (Time.time > m_lastShootTimestamp + m_shootCooldown )
             {
+                if (ControllerManager.Instance != null) ControllerManager.Instance.RumblePulse(0.5f, 0.8f, 0.1f);
                 Shoot();
             } 
         }
@@ -83,6 +117,11 @@ public class Player : MonoBehaviour
     void Shoot()
     {
         Instantiate(m_bulletPrefab, m_shootAt.position, Quaternion.identity);
+        transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
+        {
+            transform.DOScaleY(0.5f, 0.1f);
+        });
+
         m_lastShootTimestamp = Time.time;
     }
 
