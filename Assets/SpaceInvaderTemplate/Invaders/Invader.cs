@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Invader : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class Invader : MonoBehaviour
     [SerializeField] private GameObject m_onHitParticle;
     [SerializeField] private GameObject m_onDieParticle;
     [SerializeField] private GameObject m_explosionRippleParticleEffect;
+
+    [Header("SFX")] [SerializeField] private AudioClip m_onDieAudio;
 
 
     public Vector2Int GridIndex { get; private set; }
@@ -46,6 +49,7 @@ public class Invader : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
         Destroy(collision.gameObject);
+        SoundManager.Instance.PlaySFX3D(m_onDieAudio, transform.position, 2.0f, Random.Range(0.8f,1.2f));
     }
 
     IEnumerator DeathTimer(float timerDeath, GameObject hitParticle, GameObject deathParticle)
