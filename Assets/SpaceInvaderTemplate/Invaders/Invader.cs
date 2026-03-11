@@ -64,7 +64,7 @@ public class Invader : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
         Destroy(collision.gameObject);
-        SoundManager.Instance.PlaySFX3D(m_onDieAudio, transform.position, 2.0f, Random.Range(0.8f,1.2f));
+        SoundManager.Instance.PlaySFX3D(m_onDieAudio, transform.position, 1.0f, Random.Range(0.8f,1.2f));
     }
 
     IEnumerator DeathTimer(float timerDeath, GameObject hitParticle, GameObject deathParticle)
