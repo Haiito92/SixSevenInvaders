@@ -85,7 +85,7 @@ public class SoundManager : MonoBehaviour
 
             while (m_musicSource.volume < 1.0f)
             {
-                m_musicSource.volume = Math.Min(m_musicSource.volume + Time.deltaTime / m_musicFadeOutSpeed, 1.0f);
+                m_musicSource.volume = Math.Min(m_musicSource.volume + Time.deltaTime / m_musicFadeInSpeed, 1.0f);
                 yield return null;
             }
         }
