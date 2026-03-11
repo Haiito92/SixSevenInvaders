@@ -52,10 +52,15 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private Player currentPlayer;
 
+    //Music
     [Header("Sounds / Music")]
     [SerializeField] private AudioClip mainMenuMusic;
     [SerializeField] private AudioClip gameMusic;
     [SerializeField] private AudioClip highScoreMusic;
+    
+    //Pixelisation
+    [Header("Pixelisation")] 
+    [SerializeField] private FullScreenPixel m_fullScreenPostProcess;
 
     void Awake()
     {
@@ -68,8 +73,8 @@ public class GameManager : MonoBehaviour
         //     return;
         // }
         Instance = this;
-        currentGameState = GameState.MAIN_MENU;
         onGameStateChange += OnGameStateChange;
+        ChangeGameState(GameState.MAIN_MENU);
         _waitForWavesCoroutine = WaitForNextWave(2.0f);
     }
 
