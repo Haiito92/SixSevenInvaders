@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform m_shootAt = null;
     [SerializeField] private float m_shootCooldown = 1f;
     [SerializeField] private string m_collideWithTag = "Untagged";
+
+    [SerializeField] private AudioClip m_shootSound;
 
     private float m_lastShootTimestamp = Mathf.NegativeInfinity;
 
@@ -109,6 +112,7 @@ public class Player : MonoBehaviour
             if (Time.time > m_lastShootTimestamp + m_shootCooldown )
             {
                 if (ControllerManager.Instance != null) ControllerManager.Instance.RumblePulse(0.5f, 0.8f, 0.1f);
+                SoundManager.Instance.PlaySFX3D(m_shootSound, transform.position, 1.0f, Random.Range(0.8f,1.2f));
                 Shoot();
             } 
         }
