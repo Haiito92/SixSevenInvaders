@@ -117,9 +117,10 @@ MonoBehaviour:
   m_onDieParticle: {fileID: 8161938616666944714, guid: 40f1c64114405514f820be2bc52d352a, type: 3}
   m_explosionRippleParticleEffect: {fileID: 1793594205384284709, guid: 9a989478813087d4da870f7d00574432, type: 3}
   m_onDieAudio: {fileID: 8300000, guid: ae38614b3b9b1634b8ea5000875128cb, type: 3}
-  m_scaleSquashOffset: {x: -0.05, y: -0.1, z: 0}
-  m_squashAnimDuration: 1
   m_offsetRadius: 0.3
+  m_offsetMoveSpeed: 2
+  m_squashPower: {x: 0.1, y: 0.1}
+  m_squashSpeed: 2
 --- !u!61 &1286698669282929100
 BoxCollider2D:
   m_ObjectHideFlags: 0
