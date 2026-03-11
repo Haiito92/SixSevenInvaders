@@ -24,7 +24,7 @@ public class ControllerManager : MonoBehaviour
 
     private void OnDisable()
     {
-        StopCoroutine(_stopRumbleAfterTime);
+        if (_stopRumbleAfterTime != null) StopCoroutine(_stopRumbleAfterTime);
         _currentPad.SetMotorSpeeds(0.0f,0.0f);
         _stopRumbleAfterTime = null;
     }

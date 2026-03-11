@@ -115,6 +115,9 @@ MonoBehaviour:
   m_shootAt: {fileID: 6033256893136108041}
   m_shootCooldown: 1
   m_collideWithTag: Untagged
+  m_shootSound: {fileID: 8300000, guid: 7f88b5afd264cb64b83c2ac7eb3e9f0f, type: 3}
+  m_nuzzleParticleEffect: {fileID: 3026980330557742341, guid: 7e3ffd9ffa222b34bb7d2ca59b0e2be6, type: 3}
+  m_explosionRippleParticleEffect: {fileID: 1793594205384284709, guid: 9a989478813087d4da870f7d00574432, type: 3}
 --- !u!58 &7192797854662910226
 CircleCollider2D:
   m_ObjectHideFlags: 0
