@@ -1064,6 +1064,7 @@ MonoBehaviour:
   mainMenuMusic: {fileID: 8300000, guid: 5dbae8cf04bee81429dd8c8115f7af76, type: 3}
   gameMusic: {fileID: 8300000, guid: 6fab8432db43c2c4ca948e0101196798, type: 3}
   highScoreMusic: {fileID: 8300000, guid: 5dbae8cf04bee81429dd8c8115f7af76, type: 3}
+  m_fullScreenPostProcess: {fileID: 0}
 --- !u!4 &879569044
 Transform:
   m_ObjectHideFlags: 0
