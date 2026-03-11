@@ -43,7 +43,7 @@ public class SoundManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        StopCoroutine(m_changeMusicCoroutine);
+        StopChangeMusic();
     }
 
     #region Music
