@@ -41,6 +41,11 @@ public class SoundManager : MonoBehaviour
         m_musicSource.volume = 0.0f;
     }
 
+    private void OnDestroy()
+    {
+        StopChangeMusic();
+    }
+
     #region Music
     public void PlayMusic(AudioClip newMusic)
     {

@@ -28,6 +28,11 @@ public class Invader : MonoBehaviour
     [SerializeField, Range(0.1f, 100.0f)] private float m_squashAnimDuration = 1.0f;
     private Tweener m_squashTweener;
 
+    private Vector2 m_pivot;
+    [SerializeField] private float m_offsetRadius;
+    private float m_randomCosOffset;
+    private float m_randomSinOffset;
+    
     public Vector2Int GridIndex { get; private set; }
 
     public void Initialize(Vector2Int gridIndex)
@@ -42,6 +47,18 @@ public class Invader : MonoBehaviour
         m_squashTweener = transform.DOScale(targetScale, m_squashAnimDuration / 2)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine);
+        
+        m_randomCosOffset = Random.Range(-1.0f, 1.0f);
+        m_randomSinOffset = Random.Range(-1.0f, 1.0f);
+        m_pivot = transform.localPosition;
+    }
+
+    private void Update()
+    {
+        Vector2 offset = new Vector2(Mathf.Cos(Time.time + m_randomCosOffset), Mathf.Sin(Time.time + m_randomSinOffset));
+        offset *= m_offsetRadius;
+        
+        transform.localPosition = m_pivot + offset;
     }
 
     public void OnDestroy()

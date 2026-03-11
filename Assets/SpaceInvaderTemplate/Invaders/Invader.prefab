@@ -119,6 +119,7 @@ MonoBehaviour:
   m_onDieAudio: {fileID: 8300000, guid: ae38614b3b9b1634b8ea5000875128cb, type: 3}
   m_scaleSquashOffset: {x: -0.05, y: -0.1, z: 0}
   m_squashAnimDuration: 1
+  m_offsetRadius: 0.3
 --- !u!61 &1286698669282929100
 BoxCollider2D:
   m_ObjectHideFlags: 0
