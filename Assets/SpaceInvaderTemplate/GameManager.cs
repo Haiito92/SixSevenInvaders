@@ -17,7 +17,7 @@ public enum GameState
     GAME_OVER
 }
 
-[DefaultExecutionOrder(-100)]
+
 public class GameManager : MonoBehaviour
 {
     public enum DIRECTION { Right = 0, Up = 1, Left = 2, Down = 3 }
@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance = null;
 
     internal Action onGameStateChange;
+
+    [Header("GameManager Data")]
 
     [SerializeField] private Vector2 bounds;
     private Bounds Bounds => new Bounds(transform.position, new Vector3(bounds.x, bounds.y, 1000f));
@@ -41,22 +43,29 @@ public class GameManager : MonoBehaviour
     
     
     //UI
+    [Header("UI")]
     [SerializeField] private GameObject MainMenuUI;
     [SerializeField] private GameObject EndMenuUI;
     
     //Player
+    [Header("Player")]
     [SerializeField] private Player currentPlayer;
+
+    [Header("Sounds / Music")]
+    [SerializeField] private AudioClip mainMenuMusic;
+    [SerializeField] private AudioClip gameMusic;
+    [SerializeField] private AudioClip HighScoreMusic;
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            return;
-        }
+        // if (Instance != null)
+        // {
+        //     Instance = this;
+        // }
+        // else
+        // {
+        //     return;
+        // }
         Instance = this;
         currentGameState = GameState.MAIN_MENU;
         onGameStateChange += OnGameStateChange;
@@ -72,7 +81,19 @@ public class GameManager : MonoBehaviour
     {
         currentPlayer.ResetPlayer();
         StopAllCoroutines();
+        if(onGameStateChange != null) onGameStateChange -= OnGameStateChange;
         SceneManager.LoadScene(1);
+    }
+
+    private void OnDestroy()
+    {
+        if(onGameStateChange != null) onGameStateChange -= OnGameStateChange;
+    }
+
+    public void QuitGame()
+    {
+        if(onGameStateChange != null) onGameStateChange -= OnGameStateChange;
+        QuitGame();
     }
 
     public void ChangeGameState(GameState newGameState)
@@ -113,6 +134,7 @@ public class GameManager : MonoBehaviour
                 StopAllCoroutines();
                 Time.timeScale = 0f;
                 _indexOfPatterns = 0;
+                currentPlayer.ResetPlayer();
                 EndMenuUI.SetActive(true);
                 break;
             default:
