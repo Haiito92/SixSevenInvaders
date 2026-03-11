@@ -52,10 +52,15 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private Player currentPlayer;
 
+    //Music
     [Header("Sounds / Music")]
     [SerializeField] private AudioClip mainMenuMusic;
     [SerializeField] private AudioClip gameMusic;
     [SerializeField] private AudioClip highScoreMusic;
+    
+    //Pixelisation
+    [Header("Pixelisation")] 
+    [SerializeField] private FullScreenPixel m_fullScreenPostProcess;
 
     void Awake()
     {
