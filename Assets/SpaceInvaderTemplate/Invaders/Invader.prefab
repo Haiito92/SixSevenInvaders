@@ -116,6 +116,8 @@ MonoBehaviour:
   m_onHitParticle: {fileID: 2209200412064585233, guid: 2b6c869555e2c4c4d8d4d49fee383684, type: 3}
   m_onDieParticle: {fileID: 8161938616666944714, guid: 40f1c64114405514f820be2bc52d352a, type: 3}
   m_explosionRippleParticleEffect: {fileID: 1793594205384284709, guid: 9a989478813087d4da870f7d00574432, type: 3}
+  m_scaleSquashOffset: {x: -0.05, y: -0.1, z: 0}
+  m_squashAnimDuration: 1
 --- !u!61 &1286698669282929100
 BoxCollider2D:
   m_ObjectHideFlags: 0

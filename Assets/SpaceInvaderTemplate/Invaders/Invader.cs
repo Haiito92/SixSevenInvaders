@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,10 @@ public class Invader : MonoBehaviour
     [SerializeField] private GameObject m_onDieParticle;
     [SerializeField] private GameObject m_explosionRippleParticleEffect;
 
+    // DOTween
+    [SerializeField] private Vector3 m_scaleSquashOffset;
+    [SerializeField, Range(0.1f, 100.0f)] private float m_squashAnimDuration = 1.0f;
+    private Tweener m_squashTweener;
 
     public Vector2Int GridIndex { get; private set; }
 
@@ -27,8 +32,18 @@ public class Invader : MonoBehaviour
         this.GridIndex = gridIndex;
     }
 
+    private void Start()
+    {
+        Vector3 targetScale = transform.localScale + m_scaleSquashOffset;
+        m_squashTweener = transform.DOScale(targetScale, m_squashAnimDuration / 2)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetEase(Ease.InOutSine);
+    }
+
     public void OnDestroy()
     {
+        
+        if(m_squashTweener != null) m_squashTweener.Kill();
         if (GameManager.Instance == null) return;
         m_onDestroyUnityEvent.Invoke();
         ScoreManager.Instance?.AddScore(m_scoreOnDeath);
