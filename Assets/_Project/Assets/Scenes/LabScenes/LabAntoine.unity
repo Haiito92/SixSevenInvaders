@@ -1130,6 +1130,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: m_testHighScoreToAdd
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: m_highScores.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[0]'
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[1]'
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[2]'
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[3]'
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083636382234558735, guid: 3f0af43d048c1c94e8deea391267fe7d, type: 3}
+      propertyPath: 'm_highScores.Array.data[4]'
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

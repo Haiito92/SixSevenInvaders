@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,10 +9,16 @@ public class ScoreManager : MonoBehaviour
 {
     #region Fields
     private UInt64 m_score;
+    private List<UInt64> m_highScores;
+    private int m_highScoreMaxAmount = 5;
+    
     #endregion
 
     #region Properties
     public UInt64 Score => m_score;
+    public List<UInt64>  HighScores => m_highScores;
+    
+    private static string SavePath => Path.Combine(Application.persistentDataPath, "HighScores.json");
     #endregion
 
     #region Actions
@@ -22,8 +31,6 @@ public class ScoreManager : MonoBehaviour
     // UInt64 is removed score
     public event Action<UInt64> ScoreRemoved; 
     #endregion
-    
-    
     
     #region Singleton
     private static ScoreManager m_instance;
@@ -45,6 +52,9 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         InitSingleton();
+        
+        m_highScores =  new List<UInt64>();
+        LoadHighScores();
     }
     
     public void AddScore(UInt64 scoreToAdd)
@@ -71,8 +81,96 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void SaveScore()
+
+    public void AddNewHighScore(UInt64 newHighScore)
     {
-        //TODO
+        bool highScoreChanged = false;
+        
+        if (m_highScores.Count == 0)
+        {
+            m_highScores.Add(newHighScore);
+            highScoreChanged = true;
+        }
+        else if (m_highScores.Count == 1)
+        {
+            if (m_highScores[0] > newHighScore)
+                m_highScores.Add(newHighScore);
+            else
+                m_highScores.Insert(0, newHighScore);
+        }
+        else
+        {
+            int low = 0;
+            int high = m_highScores.Count;
+
+            while (low < high)
+            {
+                int mid = ((high - low) / 2) + low;
+
+                if (m_highScores[mid] > newHighScore)
+                {
+                    low = mid + 1;
+                }
+                else
+                {
+                    high = mid;
+                }
+            }
+
+            if (low < m_highScores.Count)
+            {
+                m_highScores.Insert(low, newHighScore);
+                highScoreChanged = true;
+            }
+            else if(low < m_highScoreMaxAmount)
+            {
+                m_highScores.Add(newHighScore);
+                highScoreChanged = true;
+            }
+        }
+
+        int currentCount = m_highScores.Count;
+        for (int i = currentCount - 1; i > m_highScoreMaxAmount - 1; i--)
+        {
+            m_highScores.RemoveAt(i);
+        }
+
+        if (highScoreChanged)
+        {
+            SaveHighScores();
+        }
     }
+    
+    private void SaveHighScores()
+    {
+        ScoreSave save = new ScoreSave { highScores = m_highScores };
+        
+        string json = JsonUtility.ToJson(save, true);
+        File.WriteAllText(SavePath,  json);
+    }
+
+    private void LoadHighScores()
+    {
+        if (!File.Exists(SavePath)) return;
+        
+        string json = File.ReadAllText(SavePath);
+        ScoreSave save = JsonUtility.FromJson<ScoreSave>(json);
+        m_highScores = save.highScores;
+    }
+
+    private struct ScoreSave
+    {
+        public List<UInt64> highScores;
+    }
+    
+    // #region Tests
+    // [Header("Test Scores")] 
+    // [SerializeField] private UInt64 m_testHighScoreToAdd;
+    //
+    // [Button]
+    // public void AddTestHighScore() => AddNewHighScore(m_testHighScoreToAdd);
+    // [Button]
+    // public void TestLoadHighScores() => LoadHighScores();
+    //
+    // #endregion
 }
