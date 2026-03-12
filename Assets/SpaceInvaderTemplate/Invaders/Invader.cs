@@ -40,6 +40,8 @@ public class Invader : MonoBehaviour
     private float m_randomSinOffset;
 
     private Animator m_animator;
+
+    [SerializeField] private SpriteRenderer Canon;
     
     public Vector2Int GridIndex { get; private set; }
 
@@ -123,7 +125,11 @@ public class Invader : MonoBehaviour
         m_onDestroyUnityEvent.Invoke();
         StartCoroutine(DeathTimer(1.0f, hitParticle, deathParticle));
         GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<SpriteRenderer>().enabled = false;
+        foreach (var spriteRenderer in GetComponents<SpriteRenderer>())
+        {
+            spriteRenderer.enabled = false;
+        }
+        Canon.enabled = false;
         Destroy(collision.gameObject);
     }
 
