@@ -25,8 +25,8 @@ public class Invader : MonoBehaviour
 
     
     // Tweening
-    [Header("Tweening")]
     private Vector2 m_pivot;
+    [Header("Tweening")]
     [SerializeField] private float m_offsetRadius;
     [SerializeField] private float m_offsetMoveSpeed = 1.0f;
     [SerializeField] private Vector2 m_offsetPower = Vector2.one;
@@ -34,7 +34,7 @@ public class Invader : MonoBehaviour
     
     private Vector2 m_originalScale;
     [SerializeField] private Vector2 m_squashPower;
-    [SerializeField, Range(0.01f, 100.0f)] private float m_squashSpeed = 2.0f;
+    [SerializeField, Range(0.01f, 100.0f)] private float m_squashTime = 2.0f;
     
     private float m_randomCosOffset;
     private float m_randomSinOffset;
@@ -84,8 +84,8 @@ public class Invader : MonoBehaviour
         
         transform.localPosition = m_pivot + offset;
         
-        float x = m_squashPower.x * Mathf.PingPong((Time.time + m_randomCosOffset) / 2 / m_squashSpeed, 1);
-        float y = m_squashPower.y * Mathf.PingPong((Time.time + m_randomCosOffset) / 2 / m_squashSpeed, 1);
+        float x = m_squashPower.x * Mathf.PingPong((Time.time + m_randomCosOffset) / 2 / m_squashTime, 1);
+        float y = m_squashPower.y * Mathf.PingPong((Time.time + m_randomCosOffset) / 2 / m_squashTime, 1);
 
         Vector2 scale = new Vector2(
             Mathf.Max(m_originalScale.x - x, Mathf.Epsilon),
