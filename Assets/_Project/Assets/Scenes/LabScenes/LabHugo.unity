@@ -215,6 +215,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8103578247608449748, guid: ef2c1c081bc441c47a658ce83f64ef58, type: 3}
+      propertyPath: m_shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bc72787342675749a491e143304e1db, type: 3}
+    - target: {fileID: 8103578247608449748, guid: ef2c1c081bc441c47a658ce83f64ef58, type: 3}
       propertyPath: m_shootCooldown
       value: 0.2
       objectReference: {fileID: 0}
