@@ -76,9 +76,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speedMin: 1.5
+  speedMin: 0.6
   speedMax: 3
   shootRandomMin: {x: 2, y: 4}
   shootRandomMax: {x: 0.5, y: 1.5}
   timeBeforeFirstShoot: 3
-  downStep: 0.3
+  downStep: 0.5
