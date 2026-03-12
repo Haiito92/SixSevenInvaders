@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5acce96dd6725b4b982397a019a83f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_spriteRenderer: {fileID: 1727431462037305599}
   bulletPrefab: {fileID: 7369880722360228486, guid: 47d2029f071079c4a98ac35325b21f24, type: 3}
   shootAt: {fileID: 8808591723042360307}
   collideWithTag: Player
