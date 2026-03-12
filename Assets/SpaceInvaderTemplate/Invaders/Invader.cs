@@ -21,6 +21,7 @@ public class Invader : MonoBehaviour
     [SerializeField] private GameObject m_onHitParticle;
     [SerializeField] private GameObject m_onDieParticle;
     [SerializeField] private GameObject m_explosionRippleParticleEffect;
+    [SerializeField] private GameObject m_muzzleParticleEffect;
     [SerializeField] private GameObject m_sixSevenParticleEffect;
 
     
@@ -153,6 +154,12 @@ public class Invader : MonoBehaviour
 
     public void ShootAnim()
     {
+        if (!VfxDebug.BlockEnemiesEffects)
+        {
+            GameObject muzzleEffectGo = Instantiate(m_muzzleParticleEffect, shootAt.position, Quaternion.identity);
+            Destroy(muzzleEffectGo, muzzleEffectGo.GetComponent<ParticleSystem>().main.duration);
+        }
+        
         Instantiate(bulletPrefab, shootAt.position, Quaternion.identity);
         m_ShootEvent.Invoke();
     }
