@@ -162,6 +162,7 @@ MonoBehaviour:
   m_sixSevenParticleEffect: {fileID: 7868511140237852797, guid: 70bb5f37194d71144b8a25f1d56c7c9d, type: 3}
   m_offsetRadius: 0.3
   m_offsetMoveSpeed: 2
+  m_offsetPower: {x: 1, y: 0.2}
   m_squashPower: {x: 0.1, y: 0.1}
   m_squashSpeed: 2
 --- !u!61 &1286698669282929100
