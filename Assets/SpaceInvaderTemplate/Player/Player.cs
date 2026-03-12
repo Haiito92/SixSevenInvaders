@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
     private Tweener m_movementDoTween;
     private Tweener m_shootDoTween;
     private Tweener m_shootDoTweenEnd;
-
     
     
     private void OnEnable()
@@ -151,7 +150,10 @@ public class Player : MonoBehaviour
         float delta = m_direction * m_speed * Time.deltaTime;
         transform.position = GameManager.Instance.KeepInBounds(transform.position + Vector3.right * delta);
         Vector3 rotation = new Vector3(0.0f, 0.0f, -20.0f * m_direction);
-        m_movementDoTween = transform.DORotate(rotation, 0.2f);
+        if (!VfxDebug.BlockPlayerEffects)
+        {
+            m_movementDoTween = transform.DORotate(rotation, 0.2f);
+        }
     }
 
     private void OnShoot(InputAction.CallbackContext ctx)
@@ -160,7 +162,10 @@ public class Player : MonoBehaviour
         {
             if (Time.time > m_lastShootTimestamp + m_shootCooldown )
             {
-                if (ControllerManager.Instance != null) ControllerManager.Instance.RumblePulse(0.5f, 0.8f, 0.1f);
+                if (!VfxDebug.BlockPlayerEffects)
+                {
+                    if (ControllerManager.Instance != null) ControllerManager.Instance.RumblePulse(0.5f, 0.8f, 0.1f);
+                }
                 SoundManager.Instance.PlaySFX3D(m_shootSound, transform.position, 1.0f, Random.Range(0.8f,1.2f));
                 Shoot();
             } 
@@ -190,7 +195,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag != m_collideWithTag) { return; }
 
-        PlayerHitEvent.Invoke();
+        if (!VfxDebug.BlockPlayerEffects)
+        {
+            PlayerHitEvent.Invoke();
+        }
         GameManager.Instance.PlayGameOver();
     }
 
@@ -236,8 +244,6 @@ public class Player : MonoBehaviour
             m_toggleEnemiesEffects.action.started += OnToggleEnemiesEffects;
         }
     }
-
-    
 
     private void UnsubscribeToDebugToggleActions()
     {
