@@ -120,6 +120,8 @@ public class SoundManager : MonoBehaviour
 
     private void PlaySFX(AudioClip sfx, Vector3 position, float volume = 1.0f, float pitch = 1.0f, float spatialBlend = 1.0f)
     {
+        if(VfxDebug.BlockSoundEffects) return;
+        
         GameObject go = new GameObject("SFX");
         go.transform.parent = transform;
         go.transform.position =  position; 
