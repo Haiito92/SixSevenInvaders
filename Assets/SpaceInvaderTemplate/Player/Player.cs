@@ -175,12 +175,17 @@ public class Player : MonoBehaviour
     void Shoot()
     {
         Instantiate(m_bulletPrefab, m_shootAt.position, Quaternion.identity);
-        GameObject nuzzle = Instantiate(m_nuzzleParticleEffect, m_shootAt.position, Quaternion.identity);
-        StartCoroutine(NuzzleDeath(nuzzle));
-        m_shootDoTween = transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
+
+        if (!VfxDebug.BlockPlayerEffects)
         {
-            m_shootDoTweenEnd = transform.DOScaleY(0.5f, 0.1f);
-        });
+            GameObject nuzzle = Instantiate(m_nuzzleParticleEffect, m_shootAt.position, Quaternion.identity);
+            StartCoroutine(NuzzleDeath(nuzzle));
+            
+            m_shootDoTween = transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
+            {
+                m_shootDoTweenEnd = transform.DOScaleY(0.5f, 0.1f);
+            });
+        }
 
         m_lastShootTimestamp = Time.time;
     }
