@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     private Tweener m_shootDoTween;
     private Tweener m_shootDoTweenEnd;
 
+    
+    
     private void OnEnable()
     {
         if (m_moveAction)
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour
         {
             m_shootAction.action.started += OnShoot;
         }
+
+        SubscribeToDebugToggleActions();
     }
 
     private void Update()
@@ -84,6 +88,7 @@ public class Player : MonoBehaviour
         {
             m_shootDoTweenEnd.Kill();
         }
+        UnsubscribeToDebugToggleActions();
     }
     
     private void OnDestroy()
@@ -114,6 +119,7 @@ public class Player : MonoBehaviour
         {
             m_shootDoTweenEnd.Kill();
         }
+        UnsubscribeToDebugToggleActions();
     }
 
     public void ResetPlayer()
@@ -130,6 +136,7 @@ public class Player : MonoBehaviour
         {
             m_shootAction.action.started -= OnShoot;
         } 
+        UnsubscribeToDebugToggleActions();
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
@@ -186,4 +193,112 @@ public class Player : MonoBehaviour
         PlayerHitEvent.Invoke();
         GameManager.Instance.PlayGameOver();
     }
+
+    #region Debug VFX
+    //Debug Vfx
+    [Header("Debug VFX Inputs Actions")]
+    [SerializeField] private InputActionReference m_toggleAllEffects;
+    [SerializeField] private InputActionReference m_toggleRipple;
+    [SerializeField] private InputActionReference m_toggleFullScreenPixel;
+    [SerializeField] private InputActionReference m_togglePlayerEffects;
+    [SerializeField] private InputActionReference m_toggleEnemiesEffects;
+
+    private bool m_isSubscribedToDebugToggleActions = false;
+    
+    private void SubscribeToDebugToggleActions()
+    {
+        if(m_isSubscribedToDebugToggleActions) return;
+        
+        m_isSubscribedToDebugToggleActions = true;
+        
+        if (m_toggleAllEffects)
+        {
+            m_toggleAllEffects.action.started += OnToggleAllEffects;
+        }
+        
+        if (m_toggleRipple)
+        {
+            m_toggleRipple.action.started += OnToggleRipple;
+        }
+        
+        if (m_toggleFullScreenPixel)
+        {
+            m_toggleFullScreenPixel.action.started += OnToggleFullScreenPixel;
+        }
+        
+        if (m_togglePlayerEffects)
+        {
+            m_togglePlayerEffects.action.started += OnTogglePlayerEffects;
+        }
+        
+        if (m_toggleEnemiesEffects)
+        {
+            m_toggleEnemiesEffects.action.started += OnToggleEnemiesEffects;
+        }
+    }
+
+    
+
+    private void UnsubscribeToDebugToggleActions()
+    {
+        if(!m_isSubscribedToDebugToggleActions) return;
+        
+        m_isSubscribedToDebugToggleActions = false;
+        
+        if (m_toggleAllEffects)
+        {
+            m_toggleAllEffects.action.started -= OnToggleAllEffects;
+        }
+        
+        if (m_toggleRipple)
+        {
+            m_toggleRipple.action.started -= OnToggleRipple;
+        }
+        
+        if (m_toggleFullScreenPixel)
+        {
+            m_toggleFullScreenPixel.action.started -= OnToggleFullScreenPixel;
+        }
+        
+        if (m_togglePlayerEffects)
+        {
+            m_togglePlayerEffects.action.started -= OnTogglePlayerEffects;
+        }
+        
+        if (m_toggleEnemiesEffects)
+        {
+            m_toggleEnemiesEffects.action.started -= OnToggleEnemiesEffects;
+        }
+    }
+    
+    private void OnToggleAllEffects(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleAllEffects();
+    }
+
+    private void OnToggleRipple(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleRipple();
+    }
+
+    private void OnToggleFullScreenPixel(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleFullScreenPixel();
+    }
+
+    private void OnTogglePlayerEffects(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.TogglePlayerEffects();
+    }
+
+    private void OnToggleEnemiesEffects(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleEnemiesEffects();
+    }
+    #endregion
 }
