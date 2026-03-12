@@ -119,6 +119,7 @@ MonoBehaviour:
   m_collideWithTag: Untagged
   m_shootSound: {fileID: 8300000, guid: 7bc72787342675749a491e143304e1db, type: 3}
   m_nuzzleParticleEffect: {fileID: 3026980330557742341, guid: 7e3ffd9ffa222b34bb7d2ca59b0e2be6, type: 3}
+  m_deathHitParticleEffect: {fileID: 2209200412064585233, guid: be592872ea8df554ca46a4de0353f395, type: 3}
   PlayerHitEvent:
     m_PersistentCalls:
       m_Calls:

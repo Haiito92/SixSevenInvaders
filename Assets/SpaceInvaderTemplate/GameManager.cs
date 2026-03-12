@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private List<GameObject> listOfPatterns;
     private List<GameObject> _listOfWaves = new List<GameObject>();
-    private int _indexOfPatterns = 0;
+    [SerializeField] private int _indexOfPatterns = 0;
 
     private IEnumerator _waitForWavesCoroutine;
     
@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.WAVE_STANDBY: //Between 2 waves
+                _waitForWavesCoroutine = WaitForNextWave(2.0f);
                 StartCoroutine(_waitForWavesCoroutine);
                 _indexOfPatterns++;
                 m_fullScreenPostProcess.m_effectSpeed = 2.0f;

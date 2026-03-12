@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 
     [Header("Particle Effect")]
     [SerializeField] private GameObject m_nuzzleParticleEffect;
+    [SerializeField] private GameObject m_deathHitParticleEffect;
 
     private float m_lastShootTimestamp = Mathf.NegativeInfinity;
 
@@ -203,7 +204,12 @@ public class Player : MonoBehaviour
         if (!VfxDebug.BlockPlayerEffects)
         {
             PlayerHitEvent.Invoke();
+            GameObject deathHitParticule = Instantiate(m_deathHitParticleEffect, m_shootAt.position, Quaternion.identity);
+            Destroy(deathHitParticule, deathHitParticule.GetComponent<ParticleSystem>().main.duration);
         }
+
+        
+        
         GameManager.Instance.PlayGameOver();
     }
 
