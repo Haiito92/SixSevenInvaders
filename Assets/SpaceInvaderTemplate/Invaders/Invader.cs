@@ -15,7 +15,8 @@ public class Invader : MonoBehaviour
     
     internal Action<Invader> onDestroy;
     [SerializeField] internal UnityEvent m_onDestroyUnityEvent;
-
+    [SerializeField] internal UnityEvent m_ShootEvent; 
+    
     [Header("Particle Effect")]
     [SerializeField] private GameObject m_onHitParticle;
     [SerializeField] private GameObject m_onDieParticle;
@@ -107,5 +108,6 @@ public class Invader : MonoBehaviour
     public void Shoot()
     {
         Instantiate(bulletPrefab, shootAt.position, Quaternion.identity);
+        m_ShootEvent.Invoke();
     }
 }
