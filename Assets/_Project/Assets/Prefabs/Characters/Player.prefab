@@ -139,6 +139,7 @@ MonoBehaviour:
   m_toggleFullScreenPixel: {fileID: 8513790494807197587, guid: 20cb2651631a7b34bb3363c36996c5b0, type: 3}
   m_togglePlayerEffects: {fileID: -526583167802568509, guid: 20cb2651631a7b34bb3363c36996c5b0, type: 3}
   m_toggleEnemiesEffects: {fileID: -656820701458967045, guid: 20cb2651631a7b34bb3363c36996c5b0, type: 3}
+  m_toggleSoundEffects: {fileID: -7593057513176343391, guid: 20cb2651631a7b34bb3363c36996c5b0, type: 3}
 --- !u!58 &7192797854662910226
 CircleCollider2D:
   m_ObjectHideFlags: 0
