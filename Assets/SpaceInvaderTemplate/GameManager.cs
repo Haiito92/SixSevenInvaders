@@ -142,6 +142,8 @@ public class GameManager : MonoBehaviour
             case GameState.WAVE_STANDBY: //Between 2 waves
                 StartCoroutine(_waitForWavesCoroutine);
                 _indexOfPatterns++;
+                m_fullScreenPostProcess.m_effectSpeed = 2.0f;
+                m_fullScreenPostProcess.StartEffect();
                 break;
             case GameState.GAME_OVER: //EndGame if player dead OR lastWave is done
                 StopAllCoroutines();

@@ -200,6 +200,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8631359d6b5541d4f9a33b40fca4d969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &661505376 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1494295793489668201, guid: 57ae6706eda351642a3ab28e994ee921, type: 3}
+  m_PrefabInstance: {fileID: 773160653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 843cd2c27d7489744bdcc8c7013b4bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FullScreenPixel
 --- !u!1001 &773160653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,7 +221,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1494295793489668201, guid: 57ae6706eda351642a3ab28e994ee921, type: 3}
       propertyPath: m_effectSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1677569293232420795, guid: 57ae6706eda351642a3ab28e994ee921, type: 3}
       propertyPath: m_Name
@@ -437,6 +448,8 @@ MonoBehaviour:
   currentGameState: 0
   listOfPatterns:
   - {fileID: 7542242248972639614, guid: 292ea4031c84b2e4b921b27e7678b16e, type: 3}
+  - {fileID: 7542242248972639614, guid: 292ea4031c84b2e4b921b27e7678b16e, type: 3}
+  - {fileID: 7542242248972639614, guid: 292ea4031c84b2e4b921b27e7678b16e, type: 3}
   MainMenuUI: {fileID: 353107029}
   EndMenuUI: {fileID: 2027268102}
   HighScoresUI: {fileID: 2690149164785224616}
@@ -444,7 +457,7 @@ MonoBehaviour:
   mainMenuMusic: {fileID: 8300000, guid: 34db7bd357850534ab7566b5ddd98414, type: 3}
   gameMusic: {fileID: 8300000, guid: 218d03122fa21d0448799651d76d779b, type: 3}
   highScoreMusic: {fileID: 8300000, guid: 4f8ee705bff4fc04ca6aaec917ff994d, type: 3}
-  m_fullScreenPostProcess: {fileID: 0}
+  m_fullScreenPostProcess: {fileID: 661505376}
 --- !u!4 &879569044
 Transform:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FullScreenPixel : MonoBehaviour
 {
-    [SerializeField, Range(0.1f, 100.0f)] private float m_effectSpeed = 1.0f; 
+    [SerializeField, Range(0.1f, 100.0f)] public float m_effectSpeed = 1.0f; 
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     
     private Coroutine m_coroutine;
