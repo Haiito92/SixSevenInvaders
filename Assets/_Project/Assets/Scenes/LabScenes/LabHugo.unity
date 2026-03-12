@@ -537,8 +537,12 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8103578247608449748, guid: ef2c1c081bc441c47a658ce83f64ef58, type: 3}
+      propertyPath: m_speed
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103578247608449748, guid: ef2c1c081bc441c47a658ce83f64ef58, type: 3}
       propertyPath: m_shootCooldown
-      value: 0.65
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8213566863375726970, guid: ef2c1c081bc441c47a658ce83f64ef58, type: 3}
       propertyPath: m_Camera
@@ -633,9 +637,9 @@ MonoBehaviour:
   gameOverHeight: 0.8
   currentGameState: 0
   listOfPatterns:
-  - {fileID: 7542242248972639614, guid: 292ea4031c84b2e4b921b27e7678b16e, type: 3}
-  - {fileID: 7542242248972639614, guid: 292ea4031c84b2e4b921b27e7678b16e, type: 3}
-  - {fileID: 7542242248972639614, guid: 292ea4031c84b2e4b921b27e7678b16e, type: 3}
+  - {fileID: 7542242248972639614, guid: 499e6367be1860d4d8057db6b15b4d96, type: 3}
+  - {fileID: 7542242248972639614, guid: 499e6367be1860d4d8057db6b15b4d96, type: 3}
+  - {fileID: 7542242248972639614, guid: 499e6367be1860d4d8057db6b15b4d96, type: 3}
   MainMenuUI: {fileID: 275544230}
   EndMenuUI: {fileID: 1088950605}
   HighScoresUI: {fileID: 1088950604}
