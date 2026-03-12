@@ -6,6 +6,7 @@ public static class VfxDebug
     public static bool BlockFullScreenPixel = false;
     public static bool BlockPlayerEffects = false;
     public static bool BlockEnemiesEffects = false;
+    public static bool BlockScoreEffects = false;
     public static bool BlockSoundEffects = false;
 
     public static void ToggleRipple()
@@ -28,6 +29,11 @@ public static class VfxDebug
         BlockEnemiesEffects  = !BlockEnemiesEffects;
     }
 
+    public static void ToggleScoreEffects()
+    {
+        BlockScoreEffects  = !BlockScoreEffects;
+    }
+    
     public static void ToggleSoundEffects()
     {
         BlockSoundEffects  = !BlockSoundEffects;
@@ -35,7 +41,8 @@ public static class VfxDebug
     
     public static void ToggleAllEffects()
     {
-        if (BlockRipple || BlockFullScreenPixel || BlockPlayerEffects || BlockEnemiesEffects ||  BlockSoundEffects)
+        if (BlockRipple || BlockFullScreenPixel || BlockPlayerEffects || 
+            BlockEnemiesEffects || BlockScoreEffects || BlockSoundEffects)
         {
             UnblockAllEffects();
             return;
@@ -50,6 +57,7 @@ public static class VfxDebug
         BlockFullScreenPixel = true;
         BlockPlayerEffects = true;
         BlockEnemiesEffects = true;
+        BlockScoreEffects = true;
         BlockSoundEffects = true;
     }
     
@@ -59,6 +67,7 @@ public static class VfxDebug
         BlockFullScreenPixel = false;
         BlockPlayerEffects = false;
         BlockEnemiesEffects = false;
+        BlockScoreEffects = false;
         BlockSoundEffects = false;
     }
 }

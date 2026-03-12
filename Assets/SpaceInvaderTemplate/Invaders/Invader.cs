@@ -111,10 +111,15 @@ public class Invader : MonoBehaviour
         {
             hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
             deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
-            GameObject sixSevenVFX = Instantiate(m_sixSevenParticleEffect, transform.position, Quaternion.identity);
-            Destroy(sixSevenVFX, sixSevenVFX.GetComponent<ParticleSystem>().main.duration);
+            
             Destroy(hitParticle, hitParticle.GetComponent<ParticleSystem>().main.duration);
             Destroy(deathParticle, deathParticle.GetComponent<ParticleSystem>().main.duration);
+        }
+
+        if (!VfxDebug.BlockScoreEffects)
+        {
+            GameObject sixSevenVFX = Instantiate(m_sixSevenParticleEffect, transform.position, Quaternion.identity);
+            Destroy(sixSevenVFX, sixSevenVFX.GetComponent<ParticleSystem>().main.duration);
         }
 
         if (!VfxDebug.BlockRipple)

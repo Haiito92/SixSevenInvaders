@@ -6,6 +6,8 @@ public class ScoreUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI m_scoreText;
     private bool m_isSubscribedToScoreManager;
+    [SerializeField] private RectTransform m_tempScoreSpawn;
+    [SerializeField] private GameObject m_tempScoreTextPrefab;
     
     private void OnEnable()
     {
@@ -32,12 +34,22 @@ public class ScoreUI : MonoBehaviour
 
     private void OnScoreAdded(UInt64 scoreAdded)
     {
-        
+        if (!VfxDebug.BlockScoreEffects)
+        {
+            GameObject go = Instantiate(m_tempScoreTextPrefab, m_tempScoreSpawn);
+            TextMeshProUGUI tmp = go.GetComponent<TextMeshProUGUI>();
+            tmp.text = "+" + scoreAdded.ToString();
+        }
     }
     
     private void OnScoreRemoved(UInt64 scoreRemoved)
     {
-        
+        if (!VfxDebug.BlockScoreEffects)
+        {
+            GameObject go = Instantiate(m_tempScoreTextPrefab, m_tempScoreSpawn);
+            TextMeshProUGUI tmp = go.GetComponent<TextMeshProUGUI>();
+            tmp.text = "+" + scoreRemoved.ToString();
+        }
     }
 
     private void FormatScore(UInt64 score)
