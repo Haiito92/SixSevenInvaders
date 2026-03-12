@@ -16,7 +16,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioMixerGroup m_sfxMixerGroup;
 
     #region Singleton
-    
     private static SoundManager m_instance;
     public static SoundManager Instance => m_instance;
 
@@ -29,6 +28,7 @@ public class SoundManager : MonoBehaviour
         else
         {
             m_instance = this;
+            DontDestroyOnLoad(this);
         }
     }
     #endregion
