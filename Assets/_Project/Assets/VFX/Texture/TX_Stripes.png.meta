@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 6f71e2fd7cd86f44c9372392d13c94d3
+guid: e5b0f26f532cc69458a29116bdd5d9ab
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7646862502058684101
-    second: triangle tx 1_0
+      213: 2370062381409218719
+    second: TX_Stripes_0
+  - first:
+      213: -8329981639789379827
+    second: TX_Stripes_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: triangle tx 1_0
+      name: TX_Stripes_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 232
-        width: 1000
-        height: 536
+        y: 0
+        width: 33
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b319986b113e0e590800000000000000
-      internalID: -7646862502058684101
+      spriteID: f90b963cd2724e020800000000000000
+      internalID: 2370062381409218719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX_Stripes_1
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 0
+        width: 34
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0ff3de25d5f56c80800000000000000
+      internalID: -8329981639789379827
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      triangle tx 1_0: -7646862502058684101
+      TX_Stripes_0: 2370062381409218719
+      TX_Stripes_1: -8329981639789379827
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

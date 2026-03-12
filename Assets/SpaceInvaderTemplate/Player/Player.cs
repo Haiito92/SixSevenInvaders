@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
     private Tweener m_movementDoTween;
     private Tweener m_shootDoTween;
     private Tweener m_shootDoTweenEnd;
-
+    
+    
     private void OnEnable()
     {
         if (m_moveAction)
@@ -49,6 +50,8 @@ public class Player : MonoBehaviour
         {
             m_shootAction.action.started += OnShoot;
         }
+
+        SubscribeToDebugToggleActions();
     }
 
     private void Update()
@@ -84,6 +87,7 @@ public class Player : MonoBehaviour
         {
             m_shootDoTweenEnd.Kill();
         }
+        UnsubscribeToDebugToggleActions();
     }
     
     private void OnDestroy()
@@ -114,6 +118,7 @@ public class Player : MonoBehaviour
         {
             m_shootDoTweenEnd.Kill();
         }
+        UnsubscribeToDebugToggleActions();
     }
 
     public void ResetPlayer()
@@ -130,6 +135,7 @@ public class Player : MonoBehaviour
         {
             m_shootAction.action.started -= OnShoot;
         } 
+        UnsubscribeToDebugToggleActions();
     }
 
     private void OnMove(InputAction.CallbackContext ctx)
@@ -144,7 +150,10 @@ public class Player : MonoBehaviour
         float delta = m_direction * m_speed * Time.deltaTime;
         transform.position = GameManager.Instance.KeepInBounds(transform.position + Vector3.right * delta);
         Vector3 rotation = new Vector3(0.0f, 0.0f, -20.0f * m_direction);
-        m_movementDoTween = transform.DORotate(rotation, 0.2f);
+        if (!VfxDebug.BlockPlayerEffects)
+        {
+            m_movementDoTween = transform.DORotate(rotation, 0.2f);
+        }
     }
 
     private void OnShoot(InputAction.CallbackContext ctx)
@@ -153,7 +162,10 @@ public class Player : MonoBehaviour
         {
             if (Time.time > m_lastShootTimestamp + m_shootCooldown )
             {
-                if (ControllerManager.Instance != null) ControllerManager.Instance.RumblePulse(0.5f, 0.8f, 0.1f);
+                if (!VfxDebug.BlockPlayerEffects)
+                {
+                    if (ControllerManager.Instance != null) ControllerManager.Instance.RumblePulse(0.5f, 0.8f, 0.1f);
+                }
                 SoundManager.Instance.PlaySFX3D(m_shootSound, transform.position, 1.0f, Random.Range(0.8f,1.2f));
                 Shoot();
             } 
@@ -183,7 +195,116 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag != m_collideWithTag) { return; }
 
-        PlayerHitEvent.Invoke();
+        if (!VfxDebug.BlockPlayerEffects)
+        {
+            PlayerHitEvent.Invoke();
+        }
         GameManager.Instance.PlayGameOver();
     }
+
+    #region Debug VFX
+    //Debug Vfx
+    [Header("Debug VFX Inputs Actions")]
+    [SerializeField] private InputActionReference m_toggleAllEffects;
+    [SerializeField] private InputActionReference m_toggleRipple;
+    [SerializeField] private InputActionReference m_toggleFullScreenPixel;
+    [SerializeField] private InputActionReference m_togglePlayerEffects;
+    [SerializeField] private InputActionReference m_toggleEnemiesEffects;
+
+    private bool m_isSubscribedToDebugToggleActions = false;
+    
+    private void SubscribeToDebugToggleActions()
+    {
+        if(m_isSubscribedToDebugToggleActions) return;
+        
+        m_isSubscribedToDebugToggleActions = true;
+        
+        if (m_toggleAllEffects)
+        {
+            m_toggleAllEffects.action.started += OnToggleAllEffects;
+        }
+        
+        if (m_toggleRipple)
+        {
+            m_toggleRipple.action.started += OnToggleRipple;
+        }
+        
+        if (m_toggleFullScreenPixel)
+        {
+            m_toggleFullScreenPixel.action.started += OnToggleFullScreenPixel;
+        }
+        
+        if (m_togglePlayerEffects)
+        {
+            m_togglePlayerEffects.action.started += OnTogglePlayerEffects;
+        }
+        
+        if (m_toggleEnemiesEffects)
+        {
+            m_toggleEnemiesEffects.action.started += OnToggleEnemiesEffects;
+        }
+    }
+
+    private void UnsubscribeToDebugToggleActions()
+    {
+        if(!m_isSubscribedToDebugToggleActions) return;
+        
+        m_isSubscribedToDebugToggleActions = false;
+        
+        if (m_toggleAllEffects)
+        {
+            m_toggleAllEffects.action.started -= OnToggleAllEffects;
+        }
+        
+        if (m_toggleRipple)
+        {
+            m_toggleRipple.action.started -= OnToggleRipple;
+        }
+        
+        if (m_toggleFullScreenPixel)
+        {
+            m_toggleFullScreenPixel.action.started -= OnToggleFullScreenPixel;
+        }
+        
+        if (m_togglePlayerEffects)
+        {
+            m_togglePlayerEffects.action.started -= OnTogglePlayerEffects;
+        }
+        
+        if (m_toggleEnemiesEffects)
+        {
+            m_toggleEnemiesEffects.action.started -= OnToggleEnemiesEffects;
+        }
+    }
+    
+    private void OnToggleAllEffects(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleAllEffects();
+    }
+
+    private void OnToggleRipple(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleRipple();
+    }
+
+    private void OnToggleFullScreenPixel(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleFullScreenPixel();
+    }
+
+    private void OnTogglePlayerEffects(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.TogglePlayerEffects();
+    }
+
+    private void OnToggleEnemiesEffects(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleEnemiesEffects();
+    }
+    #endregion
 }

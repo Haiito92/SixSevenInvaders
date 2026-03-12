@@ -38,12 +38,15 @@ public class Invader : MonoBehaviour
     
     private float m_randomCosOffset;
     private float m_randomSinOffset;
+
+    private Animator m_animator;
     
     public Vector2Int GridIndex { get; private set; }
 
     private void Awake()
     {
         m_onDestroyUnityEvent.AddListener(() => { onDestroy?.Invoke(this); });
+        m_animator = GetComponent<Animator>();
     }
 
     public void Initialize(Vector2Int gridIndex, Sprite invaderSprite)
@@ -65,6 +68,13 @@ public class Invader : MonoBehaviour
 
     private void Update()
     {
+        if (VfxDebug.BlockEnemiesEffects)
+        {
+            transform.localScale = m_pivot;
+            transform.localScale = m_originalScale;
+            return;
+        }
+        
         Vector2 offset = new Vector2(
             Mathf.Cos((Time.time + m_randomCosOffset) * m_offsetPower.x * Mathf.PI / m_offsetMoveSpeed), 
             Mathf.Sin((Time.time + m_randomSinOffset) * m_offsetPower.y * Mathf.PI / m_offsetMoveSpeed));
@@ -93,13 +103,22 @@ public class Invader : MonoBehaviour
     {
         if(collision.gameObject.tag != collideWithTag) { return; }
 
-        GameObject hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
-        GameObject deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
-        GameObject deathRipple = Instantiate(m_explosionRippleParticleEffect, transform.position, Quaternion.identity);
-        GameObject sixSevenVFX = Instantiate(m_sixSevenParticleEffect, transform.position, Quaternion.identity);
-        Destroy(sixSevenVFX, sixSevenVFX.GetComponent<ParticleSystem>().main.duration);
-        Destroy(hitParticle, hitParticle.GetComponent<ParticleSystem>().main.duration);
-        Destroy(deathParticle, deathParticle.GetComponent<ParticleSystem>().main.duration);
+        GameObject hitParticle = null;
+        GameObject deathParticle = null;
+        if (!VfxDebug.BlockEnemiesEffects)
+        {
+            hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
+            deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
+            GameObject sixSevenVFX = Instantiate(m_sixSevenParticleEffect, transform.position, Quaternion.identity);
+            Destroy(sixSevenVFX, sixSevenVFX.GetComponent<ParticleSystem>().main.duration);
+            Destroy(hitParticle, hitParticle.GetComponent<ParticleSystem>().main.duration);
+            Destroy(deathParticle, deathParticle.GetComponent<ParticleSystem>().main.duration);
+        }
+
+        if (!VfxDebug.BlockRipple)
+        {
+            GameObject deathRipple = Instantiate(m_explosionRippleParticleEffect, transform.position, Quaternion.identity);
+        }
         
         m_onDestroyUnityEvent.Invoke();
         StartCoroutine(DeathTimer(1.0f, hitParticle, deathParticle));
@@ -111,12 +130,17 @@ public class Invader : MonoBehaviour
     IEnumerator DeathTimer(float timerDeath, GameObject hitParticle, GameObject deathParticle)
     {
         yield return new WaitForSeconds(timerDeath);
-        Destroy(hitParticle);
-        Destroy(deathParticle);
+        if (hitParticle) Destroy(hitParticle);
+        if (deathParticle) Destroy(deathParticle);
         Destroy(gameObject);
     }
 
     public void Shoot()
+    {
+        m_animator.SetTrigger("Shoot");
+    }
+
+    public void ShootAnim()
     {
         Instantiate(bulletPrefab, shootAt.position, Quaternion.identity);
         m_ShootEvent.Invoke();
