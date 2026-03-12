@@ -38,9 +38,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _Size: 1
-    - _SizeIn: 0.817
-    - _Smoothness: 0.912
-    - _SmoothnessIn: 0.902
+    - _SizeIn: 0.83
+    - _Smoothness: 0.86
+    - _SmoothnessIn: 0.86
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
