@@ -215,6 +215,7 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionReference m_toggleFullScreenPixel;
     [SerializeField] private InputActionReference m_togglePlayerEffects;
     [SerializeField] private InputActionReference m_toggleEnemiesEffects;
+    [SerializeField] private InputActionReference m_toggleSoundEffects;
 
     private bool m_isSubscribedToDebugToggleActions = false;
     
@@ -224,30 +225,17 @@ public class Player : MonoBehaviour
         
         m_isSubscribedToDebugToggleActions = true;
         
-        if (m_toggleAllEffects)
-        {
-            m_toggleAllEffects.action.started += OnToggleAllEffects;
-        }
+        if (m_toggleAllEffects) m_toggleAllEffects.action.started += OnToggleAllEffects;
         
-        if (m_toggleRipple)
-        {
-            m_toggleRipple.action.started += OnToggleRipple;
-        }
+        if (m_toggleRipple) m_toggleRipple.action.started += OnToggleRipple;
         
-        if (m_toggleFullScreenPixel)
-        {
-            m_toggleFullScreenPixel.action.started += OnToggleFullScreenPixel;
-        }
+        if (m_toggleFullScreenPixel) m_toggleFullScreenPixel.action.started += OnToggleFullScreenPixel;
         
-        if (m_togglePlayerEffects)
-        {
-            m_togglePlayerEffects.action.started += OnTogglePlayerEffects;
-        }
+        if (m_togglePlayerEffects) m_togglePlayerEffects.action.started += OnTogglePlayerEffects;
         
-        if (m_toggleEnemiesEffects)
-        {
-            m_toggleEnemiesEffects.action.started += OnToggleEnemiesEffects;
-        }
+        if (m_toggleEnemiesEffects) m_toggleEnemiesEffects.action.started += OnToggleEnemiesEffects;
+        
+        if(m_toggleSoundEffects) m_toggleSoundEffects.action.started += OnToggleSoundEffects;
     }
 
     private void UnsubscribeToDebugToggleActions()
@@ -256,30 +244,17 @@ public class Player : MonoBehaviour
         
         m_isSubscribedToDebugToggleActions = false;
         
-        if (m_toggleAllEffects)
-        {
-            m_toggleAllEffects.action.started -= OnToggleAllEffects;
-        }
+        if (m_toggleAllEffects) m_toggleAllEffects.action.started -= OnToggleAllEffects;
         
-        if (m_toggleRipple)
-        {
-            m_toggleRipple.action.started -= OnToggleRipple;
-        }
+        if (m_toggleRipple) m_toggleRipple.action.started -= OnToggleRipple;
         
-        if (m_toggleFullScreenPixel)
-        {
-            m_toggleFullScreenPixel.action.started -= OnToggleFullScreenPixel;
-        }
+        if (m_toggleFullScreenPixel) m_toggleFullScreenPixel.action.started -= OnToggleFullScreenPixel;
         
-        if (m_togglePlayerEffects)
-        {
-            m_togglePlayerEffects.action.started -= OnTogglePlayerEffects;
-        }
+        if (m_togglePlayerEffects) m_togglePlayerEffects.action.started -= OnTogglePlayerEffects;
         
-        if (m_toggleEnemiesEffects)
-        {
-            m_toggleEnemiesEffects.action.started -= OnToggleEnemiesEffects;
-        }
+        if (m_toggleEnemiesEffects) m_toggleEnemiesEffects.action.started -= OnToggleEnemiesEffects;
+        
+        if(m_toggleSoundEffects) m_toggleSoundEffects.action.started -= OnToggleSoundEffects;
     }
     
     private void OnToggleAllEffects(InputAction.CallbackContext ctx)
@@ -310,6 +285,12 @@ public class Player : MonoBehaviour
     {
         if(ctx.started)
             VfxDebug.ToggleEnemiesEffects();
+    }
+    
+    private void OnToggleSoundEffects(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleSoundEffects();
     }
     #endregion
 }
