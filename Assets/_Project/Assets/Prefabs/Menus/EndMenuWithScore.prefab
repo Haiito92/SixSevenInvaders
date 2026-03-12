@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 5944116686036892616}
   - component: {fileID: 1902437498821211949}
   - component: {fileID: 7181485114317703215}
+  - component: {fileID: 4640409829136013040}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -470,6 +471,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4640409829136013040}
+        m_TargetAssemblyTypeName: SoundComponent, Assembly-CSharp
+        m_MethodName: PlaySFX2D
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ResetGame
@@ -482,6 +495,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4640409829136013040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4954456223912476035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2be1b8b649bcf042b3e027aefee810c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundComponent
+  clip: {fileID: 8300000, guid: 4ceb6a89e7e27bb41b0d1d2bef092578, type: 3}
+  volume: 1
+  pitch: 1
 --- !u!1 &7811706497524291152
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7538141235574881860
 RectTransform:
   m_ObjectHideFlags: 0
