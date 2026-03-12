@@ -486,7 +486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &630493062
 SpriteRenderer:
   serializedVersion: 2
@@ -901,10 +901,12 @@ MonoBehaviour:
   listOfPatterns: []
   MainMenuUI: {fileID: 0}
   EndMenuUI: {fileID: 0}
+  HighScoresUI: {fileID: 0}
   currentPlayer: {fileID: 0}
   mainMenuMusic: {fileID: 0}
   gameMusic: {fileID: 0}
-  HighScoreMusic: {fileID: 0}
+  highScoreMusic: {fileID: 0}
+  m_fullScreenPostProcess: {fileID: 0}
 --- !u!4 &879569044
 Transform:
   m_ObjectHideFlags: 0
@@ -1220,7 +1222,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1809422117
 Transform:
@@ -1269,6 +1271,7 @@ MonoBehaviour:
   rows: 5
   columns: 11
   invaderPrefab: {fileID: 9109969425864263349, guid: 7ab41d612eaa4c040b94ebea77be05a2, type: 3}
+  m_invaderSprites: []
   bounds: {x: 10, y: 4}
   difficultyProgress:
     serializedVersion: 2
