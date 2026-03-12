@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Invader : MonoBehaviour
 {
@@ -19,7 +20,20 @@ public class Invader : MonoBehaviour
     [SerializeField] private GameObject m_onDieParticle;
     [SerializeField] private GameObject m_explosionRippleParticleEffect;
 
+    [Header("SFX")] [SerializeField] private AudioClip m_onDieAudio;
 
+    // Tweening
+    private Vector2 m_pivot;
+    [SerializeField] private float m_offsetRadius;
+    [SerializeField] private float m_offsetMoveSpeed = 1.0f;
+    
+    private Vector2 m_originalScale;
+    [SerializeField] private Vector2 m_squashPower;
+    [SerializeField, Range(0.01f, 100.0f)] private float m_squashSpeed = 2.0f;
+    
+    private float m_randomCosOffset;
+    private float m_randomSinOffset;
+    
     public Vector2Int GridIndex { get; private set; }
 
     public void Initialize(Vector2Int gridIndex)
@@ -27,8 +41,36 @@ public class Invader : MonoBehaviour
         this.GridIndex = gridIndex;
     }
 
+    private void Start()
+    {
+        m_randomCosOffset = Random.Range(-1.0f, 1.0f);
+        m_randomSinOffset = Random.Range(-1.0f, 1.0f);
+        m_pivot = transform.localPosition;
+        m_originalScale = transform.localScale;
+    }
+
+    private void Update()
+    {
+        Vector2 offset = new Vector2(
+            Mathf.Cos((Time.time + m_randomCosOffset) * Mathf.PI / m_offsetMoveSpeed), 
+            Mathf.Sin((Time.time + m_randomSinOffset) * Mathf.PI / m_offsetMoveSpeed));
+        offset *= m_offsetRadius;
+        
+        transform.localPosition = m_pivot + offset;
+        
+        float x = m_squashPower.x * Mathf.PingPong((Time.time + m_randomCosOffset) / 2 / m_squashSpeed, 1);
+        float y = m_squashPower.y * Mathf.PingPong((Time.time + m_randomCosOffset) / 2 / m_squashSpeed, 1);
+
+        Vector2 scale = new Vector2(
+            Mathf.Max(m_originalScale.x - x, Mathf.Epsilon),
+            Mathf.Max(m_originalScale.y - y, Mathf.Epsilon));
+        transform.localScale = scale;
+        
+    }
+
     public void OnDestroy()
     {
+        
         if (GameManager.Instance == null) return;
         m_onDestroyUnityEvent.Invoke();
         ScoreManager.Instance?.AddScore(m_scoreOnDeath);
@@ -46,6 +88,7 @@ public class Invader : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
         Destroy(collision.gameObject);
+        SoundManager.Instance.PlaySFX3D(m_onDieAudio, transform.position, 1.0f, Random.Range(0.8f,1.2f));
     }
 
     IEnumerator DeathTimer(float timerDeath, GameObject hitParticle, GameObject deathParticle)

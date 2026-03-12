@@ -41,6 +41,11 @@ public class SoundManager : MonoBehaviour
         m_musicSource.volume = 0.0f;
     }
 
+    private void OnDestroy()
+    {
+        StopChangeMusic();
+    }
+
     #region Music
     public void PlayMusic(AudioClip newMusic)
     {
@@ -126,6 +131,7 @@ public class SoundManager : MonoBehaviour
         source.volume = volume;
         source.pitch = pitch;
         source.spatialBlend = spatialBlend;
+        source.rolloffMode = AudioRolloffMode.Linear;
         
         Destroy(go, sfx.length);
         source.Play();
