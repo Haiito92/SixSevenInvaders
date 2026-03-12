@@ -623,7 +623,7 @@ Shader "Shader_PlayerProjectile"
 					BitangentWS = cross(NormalWS, -TangentWS);
 				#endif
 
-				Gradient gradient67 = NewGradient( 0, 3, 2, float4( 0.2352941, 0.4901961, 0.4386961, 0 ), float4( 0.2980392, 0.9764706, 0.9195881, 0.1353018 ), float4( 0.638602, 0.8867924, 0.8639531, 0.4156863 ), 0, 0, 0, 0, 0, float2( 1, 0 ), float2( 1, 1 ), 0, 0, 0, 0, 0, 0 );
+				Gradient gradient67 = NewGradient( 0, 3, 2, float4( 0.1823898, 0.3647798, 0.3283018, 0 ), float4( 0.3418772, 0.8427672, 0.7993374, 0.1353018 ), float4( 0.5881293, 0.8238993, 0.801445, 0.4156863 ), 0, 0, 0, 0, 0, float2( 1, 0 ), float2( 1, 1 ), 0, 0, 0, 0, 0, 0 );
 				float2 texCoord82 = input.ase_texcoord7.xy * float2( 1,1 ) + float2( -0.12,0 );
 				float2 texCoord84 = input.ase_texcoord7.xy * float2( 1,1 ) + float2( 0,0 );
 				float2 panner90 = ( 0.2 * _Time.y * float2( 1,0 ) + texCoord84);
@@ -1908,7 +1908,7 @@ Shader "Shader_PlayerProjectile"
 				float3 PositionRWS = GetCameraRelativePositionWS( input.positionWS );
 				float4 ShadowCoord = shadowCoord;
 
-				Gradient gradient67 = NewGradient( 0, 3, 2, float4( 0.2352941, 0.4901961, 0.4386961, 0 ), float4( 0.2980392, 0.9764706, 0.9195881, 0.1353018 ), float4( 0.638602, 0.8867924, 0.8639531, 0.4156863 ), 0, 0, 0, 0, 0, float2( 1, 0 ), float2( 1, 1 ), 0, 0, 0, 0, 0, 0 );
+				Gradient gradient67 = NewGradient( 0, 3, 2, float4( 0.1823898, 0.3647798, 0.3283018, 0 ), float4( 0.3418772, 0.8427672, 0.7993374, 0.1353018 ), float4( 0.5881293, 0.8238993, 0.801445, 0.4156863 ), 0, 0, 0, 0, 0, float2( 1, 0 ), float2( 1, 1 ), 0, 0, 0, 0, 0, 0 );
 				float2 texCoord82 = input.ase_texcoord3.xy * float2( 1,1 ) + float2( -0.12,0 );
 				float2 texCoord84 = input.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
 				float2 panner90 = ( 0.2 * _Time.y * float2( 1,0 ) + texCoord84);
@@ -2249,7 +2249,7 @@ Shader "Shader_PlayerProjectile"
 				float3 PositionRWS = GetCameraRelativePositionWS( input.positionWS );
 				float4 ShadowCoord = shadowCoord;
 
-				Gradient gradient67 = NewGradient( 0, 3, 2, float4( 0.2352941, 0.4901961, 0.4386961, 0 ), float4( 0.2980392, 0.9764706, 0.9195881, 0.1353018 ), float4( 0.638602, 0.8867924, 0.8639531, 0.4156863 ), 0, 0, 0, 0, 0, float2( 1, 0 ), float2( 1, 1 ), 0, 0, 0, 0, 0, 0 );
+				Gradient gradient67 = NewGradient( 0, 3, 2, float4( 0.1823898, 0.3647798, 0.3283018, 0 ), float4( 0.3418772, 0.8427672, 0.7993374, 0.1353018 ), float4( 0.5881293, 0.8238993, 0.801445, 0.4156863 ), 0, 0, 0, 0, 0, float2( 1, 0 ), float2( 1, 1 ), 0, 0, 0, 0, 0, 0 );
 				float2 texCoord82 = input.ase_texcoord1.xy * float2( 1,1 ) + float2( -0.12,0 );
 				float2 texCoord84 = input.ase_texcoord1.xy * float2( 1,1 ) + float2( 0,0 );
 				float2 panner90 = ( 0.2 * _Time.y * float2( 1,0 ) + texCoord84);
@@ -3112,7 +3112,7 @@ Shader "Shader_PlayerProjectile"
 					BitangentWS = cross(NormalWS, -TangentWS);
 				#endif
 
-				Gradient gradient67 = NewGradient( 0, 3, 2, float4( 0.2352941, 0.4901961, 0.4386961, 0 ), float4( 0.2980392, 0.9764706, 0.9195881, 0.1353018 ), float4( 0.638602, 0.8867924, 0.8639531, 0.4156863 ), 0, 0, 0, 0, 0, float2( 1, 0 ), float2( 1, 1 ), 0, 0, 0, 0, 0, 0 );
+				Gradient gradient67 = NewGradient( 0, 3, 2, float4( 0.1823898, 0.3647798, 0.3283018, 0 ), float4( 0.3418772, 0.8427672, 0.7993374, 0.1353018 ), float4( 0.5881293, 0.8238993, 0.801445, 0.4156863 ), 0, 0, 0, 0, 0, float2( 1, 0 ), float2( 1, 1 ), 0, 0, 0, 0, 0, 0 );
 				float2 texCoord82 = input.ase_texcoord7.xy * float2( 1,1 ) + float2( -0.12,0 );
 				float2 texCoord84 = input.ase_texcoord7.xy * float2( 1,1 ) + float2( 0,0 );
 				float2 panner90 = ( 0.2 * _Time.y * float2( 1,0 ) + texCoord84);
@@ -4218,11 +4218,11 @@ Node;AmplifyShaderEditor.SimpleSubtractOpNode, AmplifyShaderEditor, Version=0.0.
 Node;AmplifyShaderEditor.FresnelNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;72;-992,48;Inherit;True;Standard;WorldNormal;ViewDir;False;False;5;0;FLOAT3;0,0,1;False;4;FLOAT3;0,0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;5;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;86;-816,-368;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.GradientSampleNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;68;336,-288;Inherit;True;2;0;OBJECT;;False;1;FLOAT;0;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.GradientNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;67;64,-304;Inherit;False;0;3;2;0.2352941,0.4901961,0.4386961,0;0.2980392,0.9764706,0.9195881,0.1353018;0.638602,0.8867924,0.8639531,0.4156863;1,0;1,1;0;1;OBJECT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;88;-800,448;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0.23;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;87;-1088,432;Inherit;True;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;-0.42,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleAddOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;76;-528,-128;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;89;-240,32;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.GradientNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;67;64,-304;Inherit;False;0;3;2;0.1823898,0.3647798,0.3283018,0;0.3418772,0.8427672,0.7993374,0.1353018;0.5881293,0.8238993,0.801445,0.4156863;1,0;1,1;0;1;OBJECT;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;55;16,-16;Float;False;False;-1;3;UnityEditor.ShaderGraphLitGUI;0;17;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ExtraPrePass;0;0;ExtraPrePass;6;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;14;all;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;False;True;0;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;57;16,-16;Float;False;False;-1;3;UnityEditor.ShaderGraphLitGUI;0;17;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;14;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;58;16,-16;Float;False;False;-1;3;UnityEditor.ShaderGraphLitGUI;0;17;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;14;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;True;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;False;True;1;LightMode=DepthOnly;False;False;0;;0;0;Standard;0;False;0
@@ -4250,4 +4250,4 @@ WireConnection;89;1;88;0
 WireConnection;56;0;68;0
 WireConnection;56;6;76;0
 ASEEND*/
-//CHKSM=35B766F235CF2077F3E5761BE70B6ECECDBA79D3
+//CHKSM=E6DEEE9E7DC542B22776972996CAE20EC232E993
