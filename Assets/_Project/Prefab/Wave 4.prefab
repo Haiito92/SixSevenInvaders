@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6bfdfc40295a11b4b97e0380464346e9, type: 3}
   - {fileID: 1138807836267856820, guid: 9c2dd17535a4c8f40b1168ac85ef5234, type: 3}
   - {fileID: 6298789367810546905, guid: b5a8dc7ca25cf714f88b21fc3d65677f, type: 3}
-  bounds: {x: 10, y: 4}
+  bounds: {x: 10, y: 5}
   difficultyProgress:
     serializedVersion: 2
     m_Curve:
