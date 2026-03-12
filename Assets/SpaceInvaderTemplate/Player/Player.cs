@@ -301,7 +301,7 @@ public class Player : MonoBehaviour
     private void OnToggleScoreEffects(InputAction.CallbackContext ctx)
     {
         if(ctx.started)
-            VfxDebug.ToggleEnemiesEffects();
+            VfxDebug.ToggleScoreEffects();
 
     }
     
