@@ -41,7 +41,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Float: 0.45
     - _PixelRatio: 16
-    m_Colors: []
+    m_Colors:
+    - _RippleColor: {r: 0.5816945, g: 0.8821362, b: 0.909434, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
