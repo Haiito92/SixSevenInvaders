@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnWave(GameObject wavePatern)
     {
-        GameObject newWave = Instantiate(wavePatern, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject newWave = Instantiate(wavePatern, new Vector3(0, 2, 0), Quaternion.identity);
         Wave waveScript = newWave.GetComponent<Wave>();
         if ( waveScript!= null)
         {
