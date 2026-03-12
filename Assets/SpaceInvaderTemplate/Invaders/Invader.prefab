@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1286698669282929100}
   - component: {fileID: 4723533769781850479}
   - component: {fileID: 5492206235698216503}
+  - component: {fileID: 278720278373077879}
   m_Layer: 0
   m_Name: Invader
   m_TagString: Untagged
@@ -115,7 +116,19 @@ MonoBehaviour:
   m_scoreOnDeath: 100
   m_onDestroyUnityEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 278720278373077879}
+        m_TargetAssemblyTypeName: SoundComponent, Assembly-CSharp
+        m_MethodName: PlaySFX3D
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ShootEvent:
     m_PersistentCalls:
       m_Calls:
@@ -221,6 +234,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundComponent
   m_clip: {fileID: 8300000, guid: ee790110bbfdd934ea9940634466269d, type: 3}
   m_volume: 0.35
+  m_pitch: 1
+  m_randomPitch: 1
+  m_lowPitchBound: 0.8
+  m_highPitchBound: 1.2
+--- !u!114 &278720278373077879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429291776354201643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2be1b8b649bcf042b3e027aefee810c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundComponent
+  m_clip: {fileID: 8300000, guid: ae38614b3b9b1634b8ea5000875128cb, type: 3}
+  m_volume: 1
   m_pitch: 1
   m_randomPitch: 1
   m_lowPitchBound: 0.8
