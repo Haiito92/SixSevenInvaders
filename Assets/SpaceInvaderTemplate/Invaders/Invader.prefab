@@ -164,8 +164,8 @@ MonoBehaviour:
   m_offsetRadius: 0.3
   m_offsetMoveSpeed: 4
   m_offsetPower: {x: 1, y: 0.2}
-  m_squashPower: {x: 0.2, y: 0.2}
-  m_squashSpeed: 1.25
+  m_squashPower: {x: 0.1, y: 0.1}
+  m_squashTime: 0.75
   Canon: {fileID: 3267046733176598716}
 --- !u!61 &1286698669282929100
 BoxCollider2D:
