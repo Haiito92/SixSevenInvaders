@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class Invader : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer m_spriteRenderer;
     [SerializeField] private Bullet bulletPrefab = null;
     [SerializeField] private Transform shootAt = null;
     [SerializeField] private string collideWithTag = "Player";
@@ -21,7 +22,7 @@ public class Invader : MonoBehaviour
     [SerializeField] private GameObject m_explosionRippleParticleEffect;
 
     [Header("SFX")] [SerializeField] private AudioClip m_onDieAudio;
-
+    
     // Tweening
     private Vector2 m_pivot;
     [SerializeField] private float m_offsetRadius;
@@ -36,9 +37,13 @@ public class Invader : MonoBehaviour
     
     public Vector2Int GridIndex { get; private set; }
 
-    public void Initialize(Vector2Int gridIndex)
+    public void Initialize(Vector2Int gridIndex, Sprite invaderSprite)
     {
         this.GridIndex = gridIndex;
+        if (m_spriteRenderer && invaderSprite)
+        {
+            m_spriteRenderer.sprite = invaderSprite;
+        }
     }
 
     private void Start()
