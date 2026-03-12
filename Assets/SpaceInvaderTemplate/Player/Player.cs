@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour
 
     private float m_lastShootTimestamp = Mathf.NegativeInfinity;
 
+    [SerializeField] private UnityEvent PlayerHitEvent;
+    
     //DoTween
     private Tweener m_movementDoTween;
     private Tweener m_shootDoTween;
@@ -180,6 +183,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag != m_collideWithTag) { return; }
 
+        PlayerHitEvent.Invoke();
         GameManager.Instance.PlayGameOver();
     }
 }

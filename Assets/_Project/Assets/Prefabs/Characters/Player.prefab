@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7192797854662910226}
   - component: {fileID: 8213566863375726970}
   - component: {fileID: 8853207639521172826}
+  - component: {fileID: 6305266924691857434}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -118,6 +119,21 @@ MonoBehaviour:
   m_collideWithTag: Untagged
   m_shootSound: {fileID: 8300000, guid: 7f88b5afd264cb64b83c2ac7eb3e9f0f, type: 3}
   m_nuzzleParticleEffect: {fileID: 3026980330557742341, guid: 7e3ffd9ffa222b34bb7d2ca59b0e2be6, type: 3}
+  PlayerHitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6305266924691857434}
+        m_TargetAssemblyTypeName: SoundComponent, Assembly-CSharp
+        m_MethodName: PlaySFX3D
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!58 &7192797854662910226
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -206,6 +222,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6305266924691857434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145232229571527519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2be1b8b649bcf042b3e027aefee810c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundComponent
+  m_clip: {fileID: 8300000, guid: ae38614b3b9b1634b8ea5000875128cb, type: 3}
+  m_volume: 1
+  m_pitch: 1
+  m_randomPitch: 0
+  m_lowPitchBound: 0.7
+  m_highPitchBound: 1.3
 --- !u!1 &1354484655910825124
 GameObject:
   m_ObjectHideFlags: 0
