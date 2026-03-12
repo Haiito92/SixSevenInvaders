@@ -4,6 +4,7 @@ ShaderImporter:
   externalObjects: {}
   defaultTextures:
   - _TextureSample0: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - _TextureSample1: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   nonModifiableTextures: []
   userData: 
   assetBundleName: 
