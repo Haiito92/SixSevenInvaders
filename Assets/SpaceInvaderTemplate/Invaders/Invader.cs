@@ -95,7 +95,9 @@ public class Invader : MonoBehaviour
         GameObject deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
         GameObject deathRipple = Instantiate(m_explosionRippleParticleEffect, transform.position, Quaternion.identity);
         GameObject sixSevenVFX = Instantiate(m_sixSevenParticleEffect, transform.position, Quaternion.identity);
-        Destroy(sixSevenVFX, m_sixSevenParticleEffect.GetComponent<ParticleSystem>().main.duration);
+        Destroy(sixSevenVFX, sixSevenVFX.GetComponent<ParticleSystem>().main.duration);
+        Destroy(hitParticle, hitParticle.GetComponent<ParticleSystem>().main.duration);
+        Destroy(deathParticle, deathParticle.GetComponent<ParticleSystem>().main.duration);
         
         m_onDestroyUnityEvent.Invoke();
         StartCoroutine(DeathTimer(1.0f, hitParticle, deathParticle));
