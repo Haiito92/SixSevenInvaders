@@ -142,6 +142,8 @@ public class GameManager : MonoBehaviour
             case GameState.WAVE_STANDBY: //Between 2 waves
                 StartCoroutine(_waitForWavesCoroutine);
                 _indexOfPatterns++;
+                m_fullScreenPostProcess.m_effectSpeed = 2.0f;
+                m_fullScreenPostProcess.StartEffect();
                 break;
             case GameState.GAME_OVER: //EndGame if player dead OR lastWave is done
                 StopAllCoroutines();
@@ -170,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnWave(GameObject wavePatern)
     {
-        GameObject newWave = Instantiate(wavePatern, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject newWave = Instantiate(wavePatern, new Vector3(0, 2, 0), Quaternion.identity);
         Wave waveScript = newWave.GetComponent<Wave>();
         if ( waveScript!= null)
         {

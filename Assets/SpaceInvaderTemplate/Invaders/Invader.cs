@@ -15,15 +15,17 @@ public class Invader : MonoBehaviour
     
     internal Action<Invader> onDestroy;
     [SerializeField] internal UnityEvent m_onDestroyUnityEvent;
-
+    [SerializeField] internal UnityEvent m_ShootEvent; 
+    
     [Header("Particle Effect")]
     [SerializeField] private GameObject m_onHitParticle;
     [SerializeField] private GameObject m_onDieParticle;
     [SerializeField] private GameObject m_explosionRippleParticleEffect;
+    [SerializeField] private GameObject m_sixSevenParticleEffect;
 
-    [Header("SFX")] [SerializeField] private AudioClip m_onDieAudio;
     
     // Tweening
+    [Header("Tweening")]
     private Vector2 m_pivot;
     [SerializeField] private float m_offsetRadius;
     [SerializeField] private float m_offsetMoveSpeed = 1.0f;
@@ -36,6 +38,11 @@ public class Invader : MonoBehaviour
     private float m_randomSinOffset;
     
     public Vector2Int GridIndex { get; private set; }
+
+    private void Awake()
+    {
+        m_onDestroyUnityEvent.AddListener(() => { onDestroy?.Invoke(this); });
+    }
 
     public void Initialize(Vector2Int gridIndex, Sprite invaderSprite)
     {
@@ -77,7 +84,6 @@ public class Invader : MonoBehaviour
     {
         
         if (GameManager.Instance == null) return;
-        m_onDestroyUnityEvent.Invoke();
         ScoreManager.Instance?.AddScore(m_scoreOnDeath);
     }
 
@@ -88,12 +94,16 @@ public class Invader : MonoBehaviour
         GameObject hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
         GameObject deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
         GameObject deathRipple = Instantiate(m_explosionRippleParticleEffect, transform.position, Quaternion.identity);
-        onDestroy?.Invoke(this);
+        GameObject sixSevenVFX = Instantiate(m_sixSevenParticleEffect, transform.position, Quaternion.identity);
+        Destroy(sixSevenVFX, sixSevenVFX.GetComponent<ParticleSystem>().main.duration);
+        Destroy(hitParticle, hitParticle.GetComponent<ParticleSystem>().main.duration);
+        Destroy(deathParticle, deathParticle.GetComponent<ParticleSystem>().main.duration);
+        
+        m_onDestroyUnityEvent.Invoke();
         StartCoroutine(DeathTimer(1.0f, hitParticle, deathParticle));
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
         Destroy(collision.gameObject);
-        SoundManager.Instance.PlaySFX3D(m_onDieAudio, transform.position, 1.0f, Random.Range(0.8f,1.2f));
     }
 
     IEnumerator DeathTimer(float timerDeath, GameObject hitParticle, GameObject deathParticle)
@@ -107,5 +117,6 @@ public class Invader : MonoBehaviour
     public void Shoot()
     {
         Instantiate(bulletPrefab, shootAt.position, Quaternion.identity);
+        m_ShootEvent.Invoke();
     }
 }
