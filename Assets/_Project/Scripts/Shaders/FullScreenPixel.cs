@@ -29,22 +29,25 @@ public class FullScreenPixel : MonoBehaviour
 
     private IEnumerator Effect()
     {
-        while (m_spriteRenderer.color.a < 1.0f)
+        if(!VfxDebug.BlockFullScreenPixel)
         {
-            Color color = m_spriteRenderer.color;
-            color.a = Mathf.Min(color.a + Time.deltaTime / m_effectSpeed, 1.0f);
+            while (m_spriteRenderer.color.a < 1.0f)
+            {
+                Color color = m_spriteRenderer.color;
+                color.a = Mathf.Min(color.a + Time.deltaTime / m_effectSpeed, 1.0f);
             
-            m_spriteRenderer.color =  color;
-            yield return null;
-        }
+                m_spriteRenderer.color =  color;
+                yield return null;
+            }
         
-        while (m_spriteRenderer.color.a > 0.0f)
-        {
-            Color color = m_spriteRenderer.color;
-            color.a = Mathf.Max(color.a - Time.deltaTime / m_effectSpeed, 0.0f);
+            while (m_spriteRenderer.color.a > 0.0f)
+            {
+                Color color = m_spriteRenderer.color;
+                color.a = Mathf.Max(color.a - Time.deltaTime / m_effectSpeed, 0.0f);
             
-            m_spriteRenderer.color =  color;
-            yield return null;
+                m_spriteRenderer.color =  color;
+                yield return null;
+            }
         }
         Destroy(_67Object);
     }
