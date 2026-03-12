@@ -21,6 +21,7 @@ public class Invader : MonoBehaviour
     [SerializeField] private GameObject m_onHitParticle;
     [SerializeField] private GameObject m_onDieParticle;
     [SerializeField] private GameObject m_explosionRippleParticleEffect;
+    [SerializeField] private GameObject m_sixSevenParticleEffect;
 
     
     // Tweening
@@ -93,6 +94,9 @@ public class Invader : MonoBehaviour
         GameObject hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
         GameObject deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
         GameObject deathRipple = Instantiate(m_explosionRippleParticleEffect, transform.position, Quaternion.identity);
+        GameObject sixSevenVFX = Instantiate(m_sixSevenParticleEffect, transform.position, Quaternion.identity);
+        Destroy(sixSevenVFX, m_sixSevenParticleEffect.GetComponent<ParticleSystem>().main.duration);
+        
         m_onDestroyUnityEvent.Invoke();
         StartCoroutine(DeathTimer(1.0f, hitParticle, deathParticle));
         GetComponent<BoxCollider2D>().enabled = false;
