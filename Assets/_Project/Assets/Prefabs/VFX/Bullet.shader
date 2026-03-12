@@ -185,7 +185,7 @@ Shader "Bullet"
 				float smoothstepResult9 = smoothstep( 0.0 , 1.0 , tex2D( _TextureSample0, ( tex2D( _TextureSample1, temp_output_36_0 ).a + panner7 ) ).a);
 				
 
-				float4 Color = ( ( float4( 0.4, 0, 0, 0 ) + smoothstepResult9 ) * 1 );
+				float4 Color = ( ( float4( 1, 0, 0, 0 ) + smoothstepResult9 ) * 1 );
 				float AlphaClipThreshold = 0.5;
 
 			#if defined( ALPHA_CLIP_THRESHOLD )
@@ -371,7 +371,7 @@ Shader "Bullet"
 				float smoothstepResult9 = smoothstep( 0.0 , 1.0 , tex2D( _TextureSample0, ( tex2D( _TextureSample1, temp_output_36_0 ).a + panner7 ) ).a);
 				
 
-				float4 Color = ( ( float4( 0.4, 0, 0, 0 ) + smoothstepResult9 ) * 1 );
+				float4 Color = ( ( float4( 1, 0, 0, 0 ) + smoothstepResult9 ) * 1 );
 				float AlphaClipThreshold = 0.5;
 
 			#if defined( ALPHA_CLIP_THRESHOLD )
@@ -528,7 +528,7 @@ Shader "Bullet"
 				float smoothstepResult9 = smoothstep( 0.0 , 1.0 , tex2D( _TextureSample0, ( tex2D( _TextureSample1, temp_output_36_0 ).a + panner7 ) ).a);
 				
 
-				float4 Color = ( ( float4( 0.4, 0, 0, 0 ) + smoothstepResult9 ) * 1 );
+				float4 Color = ( ( float4( 1, 0, 0, 0 ) + smoothstepResult9 ) * 1 );
 				float AlphaClipThreshold = 0.5;
 
 				#if defined( ALPHA_CLIP_THRESHOLD )
@@ -661,7 +661,7 @@ Shader "Bullet"
 				float smoothstepResult9 = smoothstep( 0.0 , 1.0 , tex2D( _TextureSample0, ( tex2D( _TextureSample1, temp_output_36_0 ).a + panner7 ) ).a);
 				
 
-				float4 Color = ( ( float4( 0.4, 0, 0, 0 ) + smoothstepResult9 ) * 1 );
+				float4 Color = ( ( float4( 1, 0, 0, 0 ) + smoothstepResult9 ) * 1 );
 				float AlphaClipThreshold = 0.5;
 
 				#if defined( ALPHA_CLIP_THRESHOLD )
@@ -684,12 +684,12 @@ Shader "Bullet"
 Version=19907
 Node;AmplifyShaderEditor.TextureCoordinatesNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;35;-2384,240;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.ScaleAndOffsetNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;36;-2080,240;Inherit;True;3;0;FLOAT2;0,0;False;1;FLOAT;0.5;False;2;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.PannerNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;7;-1776,240;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;1,0;False;1;FLOAT;0.1;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SamplerNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;25;-1760,-112;Inherit;True;Property;_TextureSample1;Texture Sample 1;0;0;Create;True;0;0;0;False;0;False;-1;8f586378b4e144a9851e7b34d9b748ee;8f586378b4e144a9851e7b34d9b748ee;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;False;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.PannerNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;7;-1776,240;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;1,0;False;1;FLOAT;0.1;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SimpleAddOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;22;-1440,32;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SamplerNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;37;-1120,-32;Inherit;True;Property;_TextureSample0;Texture Sample 0;1;0;Create;True;0;0;0;False;0;False;-1;8f586378b4e144a9851e7b34d9b748ee;8f586378b4e144a9851e7b34d9b748ee;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;False;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
-Node;AmplifyShaderEditor.Vector4Node, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;27;-672,-480;Inherit;True;Constant;_Vector0;Vector 0;2;0;Create;True;0;0;0;False;0;False;0.4,0,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SmoothstepOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;9;-656,-112;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.Vector4Node, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;27;-672,-480;Inherit;True;Constant;_Vector0;Vector 0;2;0;Create;True;0;0;0;False;0;False;1,0,0,0;0,0,0,0;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleAddOpNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;18;-304,-176;Inherit;True;2;2;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.RangedFloatNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;6;-1744,-288;Inherit;False;Constant;_Float0;Float 0;1;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleTimeNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;5;-1504,-256;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
@@ -702,8 +702,8 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Versi
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;2;0,0;Float;False;False;-1;3;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;SceneSelectionPass;0;2;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;5;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;UniversalMaterialType=Unlit;ShaderGraphShader=true;True;0;True;14;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode, AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;3;0,0;Float;False;False;-1;3;UnityEditor.ShaderGraph.GenericShaderGraphMaterialGUI;0;1;New Amplify Shader;cf964e524c8e69742b1d21fbe2ebcc4a;True;ScenePickingPass;0;3;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;5;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;UniversalMaterialType=Unlit;ShaderGraphShader=true;True;0;True;14;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
 WireConnection;36;0;35;0
-WireConnection;7;0;36;0
 WireConnection;25;1;36;0
+WireConnection;7;0;36;0
 WireConnection;22;0;25;4
 WireConnection;22;1;7;0
 WireConnection;37;1;22;0
@@ -716,4 +716,4 @@ WireConnection;15;0;13;0
 WireConnection;39;0;18;0
 WireConnection;0;0;39;0
 ASEEND*/
-//CHKSM=B7D18B44292887C24CF165AA013D6C39BEC78C6E
+//CHKSM=3C5781D76DE83E69E3A51B2F680A81BA0577463C
