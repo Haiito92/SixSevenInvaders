@@ -38,12 +38,15 @@ public class Invader : MonoBehaviour
     
     private float m_randomCosOffset;
     private float m_randomSinOffset;
+
+    private Animator m_animator;
     
     public Vector2Int GridIndex { get; private set; }
 
     private void Awake()
     {
         m_onDestroyUnityEvent.AddListener(() => { onDestroy?.Invoke(this); });
+        m_animator = GetComponent<Animator>();
     }
 
     public void Initialize(Vector2Int gridIndex, Sprite invaderSprite)
@@ -133,6 +136,11 @@ public class Invader : MonoBehaviour
     }
 
     public void Shoot()
+    {
+        m_animator.SetTrigger("Shoot");
+    }
+
+    public void ShootAnim()
     {
         Instantiate(bulletPrefab, shootAt.position, Quaternion.identity);
         m_ShootEvent.Invoke();
