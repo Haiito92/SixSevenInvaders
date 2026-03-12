@@ -267,8 +267,8 @@ MonoBehaviour:
   m_volume: 1
   m_pitch: 1
   m_randomPitch: 1
-  m_lowPitchBound: 0.8
-  m_highPitchBound: 1.2
+  m_lowPitchBound: 0.2
+  m_highPitchBound: 2
 --- !u!1 &9027937785671472930
 GameObject:
   m_ObjectHideFlags: 0

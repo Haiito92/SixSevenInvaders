@@ -7,6 +7,8 @@ public class FullScreenPixel : MonoBehaviour
 {
     [SerializeField, Range(0.1f, 100.0f)] public float m_effectSpeed = 1.0f; 
     [SerializeField] private SpriteRenderer m_spriteRenderer;
+    [SerializeField] private GameObject m_67Particle;
+    private GameObject _67Object;
     
     private Coroutine m_coroutine;
 
@@ -18,7 +20,7 @@ public class FullScreenPixel : MonoBehaviour
     public void StartEffect()
     {
         StopEffect();
-        
+        _67Object = Instantiate(m_67Particle, transform.position, Quaternion.identity);
         m_coroutine = StartCoroutine(Effect());
     }
 
@@ -41,6 +43,7 @@ public class FullScreenPixel : MonoBehaviour
             m_spriteRenderer.color =  color;
             yield return null;
         }
+        Destroy(_67Object);
     }
 
     private void StopEffect()
