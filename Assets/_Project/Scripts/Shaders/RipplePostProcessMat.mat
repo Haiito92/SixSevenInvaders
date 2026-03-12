@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.25
+    - _Alpha: 0.5
     - _Float: 0.45
     - _PixelRatio: 16
     m_Colors:
