@@ -215,6 +215,7 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionReference m_toggleFullScreenPixel;
     [SerializeField] private InputActionReference m_togglePlayerEffects;
     [SerializeField] private InputActionReference m_toggleEnemiesEffects;
+    [SerializeField] private InputActionReference m_toggleScoreEffects;
     [SerializeField] private InputActionReference m_toggleSoundEffects;
 
     private bool m_isSubscribedToDebugToggleActions = false;
@@ -235,6 +236,8 @@ public class Player : MonoBehaviour
         
         if (m_toggleEnemiesEffects) m_toggleEnemiesEffects.action.started += OnToggleEnemiesEffects;
         
+        if(m_toggleScoreEffects) m_toggleScoreEffects.action.started += OnToggleScoreEffects;
+        
         if(m_toggleSoundEffects) m_toggleSoundEffects.action.started += OnToggleSoundEffects;
     }
 
@@ -254,9 +257,11 @@ public class Player : MonoBehaviour
         
         if (m_toggleEnemiesEffects) m_toggleEnemiesEffects.action.started -= OnToggleEnemiesEffects;
         
+        if(m_toggleScoreEffects) m_toggleScoreEffects.action.started -= OnToggleScoreEffects;
+        
         if(m_toggleSoundEffects) m_toggleSoundEffects.action.started -= OnToggleSoundEffects;
     }
-    
+
     private void OnToggleAllEffects(InputAction.CallbackContext ctx)
     {
         if(ctx.started)
@@ -285,6 +290,13 @@ public class Player : MonoBehaviour
     {
         if(ctx.started)
             VfxDebug.ToggleEnemiesEffects();
+    }
+
+    private void OnToggleScoreEffects(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            VfxDebug.ToggleEnemiesEffects();
+
     }
     
     private void OnToggleSoundEffects(InputAction.CallbackContext ctx)

@@ -70,6 +70,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "DebugToggleScoreEffects",
+                    "type": "Button",
+                    "id": "830c5920-5308-48d0-9cf0-84c38fa789a6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "DebugToggleSoundEffects",
                     "type": "Button",
                     "id": "9f01e4ca-be0e-48d3-9cd8-c17ece338eb3",
@@ -231,6 +240,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DebugToggleSoundEffects",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c9b46b9-aab0-4186-b682-5ae4fefd6b88",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugToggleScoreEffects",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
