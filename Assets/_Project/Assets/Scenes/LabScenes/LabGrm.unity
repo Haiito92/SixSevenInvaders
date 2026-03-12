@@ -214,7 +214,7 @@ PrefabInstance:
     - target: {fileID: 1494295793489668201, guid: 57ae6706eda351642a3ab28e994ee921, type: 3}
       propertyPath: m_64Sound
       value: 
-      objectReference: {fileID: 8300000, guid: 1db91db94513fb340a8ea985c71499ef, type: 3}
+      objectReference: {fileID: 8300000, guid: cc263603b48d67f4483f38d700f4640f, type: 3}
     - target: {fileID: 1494295793489668201, guid: 57ae6706eda351642a3ab28e994ee921, type: 3}
       propertyPath: m_67Particle
       value: 

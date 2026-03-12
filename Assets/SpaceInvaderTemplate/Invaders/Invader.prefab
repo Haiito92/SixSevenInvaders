@@ -166,6 +166,7 @@ MonoBehaviour:
   m_offsetPower: {x: 1, y: 0.2}
   m_squashPower: {x: 0.1, y: 0.1}
   m_squashSpeed: 2
+  Canon: {fileID: 3267046733176598716}
 --- !u!61 &1286698669282929100
 BoxCollider2D:
   m_ObjectHideFlags: 0
