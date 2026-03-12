@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8103578247608449748}
   - component: {fileID: 7192797854662910226}
   - component: {fileID: 8213566863375726970}
+  - component: {fileID: 8853207639521172826}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -117,7 +118,6 @@ MonoBehaviour:
   m_collideWithTag: Untagged
   m_shootSound: {fileID: 8300000, guid: 7f88b5afd264cb64b83c2ac7eb3e9f0f, type: 3}
   m_nuzzleParticleEffect: {fileID: 3026980330557742341, guid: 7e3ffd9ffa222b34bb7d2ca59b0e2be6, type: 3}
-  m_explosionRippleParticleEffect: {fileID: 1793594205384284709, guid: 9a989478813087d4da870f7d00574432, type: 3}
 --- !u!58 &7192797854662910226
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -184,6 +184,28 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &8853207639521172826
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145232229571527519}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 559c8f4a88c039e44b2e307cbeacd296, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1354484655910825124
 GameObject:
   m_ObjectHideFlags: 0
