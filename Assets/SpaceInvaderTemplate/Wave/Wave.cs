@@ -12,7 +12,8 @@ public class Wave : MonoBehaviour
     [SerializeField] private int columns = 11;
 
     [SerializeField] private Invader invaderPrefab = null;
-
+    [SerializeField] private List<Sprite> m_invaderSprites = new List<Sprite>();
+    
     // Initial bounds in which invaders are spawning.
     [SerializeField] private Vector2 bounds;
 
@@ -72,7 +73,16 @@ public class Wave : MonoBehaviour
             for (int j = 0; j < rows; j++)
             {
                 Invader invader = GameObject.Instantiate<Invader>(invaderPrefab, GetPosition(i, j), Quaternion.identity, transform);
-                invader.Initialize(new Vector2Int(i, j));
+
+                Sprite invaderSprite = null;
+                if (m_invaderSprites.Count > 0)
+                {
+                    int randomIndex = Random.Range(0, m_invaderSprites.Count);
+                    invaderSprite = m_invaderSprites[randomIndex];
+                }
+                
+                invader.Initialize(new Vector2Int(i, j), invaderSprite);
+                
                 invader.onDestroy += RemoveInvader;
                 invaders.Add(invader);
                 invaderPerColumn[i].invaders.Add(invader);

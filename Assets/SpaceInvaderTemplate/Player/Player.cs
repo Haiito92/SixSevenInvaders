@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -27,6 +28,13 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject m_nuzzleParticleEffect;
 
     private float m_lastShootTimestamp = Mathf.NegativeInfinity;
+
+    [SerializeField] private UnityEvent PlayerHitEvent;
+    
+    //DoTween
+    private Tweener m_movementDoTween;
+    private Tweener m_shootDoTween;
+    private Tweener m_shootDoTweenEnd;
 
     private void OnEnable()
     {
@@ -60,7 +68,22 @@ public class Player : MonoBehaviour
         if (m_shootAction)
         {
             m_shootAction.action.started -= OnShoot;
-        } 
+        }
+
+        if (m_movementDoTween != null)
+        {
+            m_movementDoTween.Kill();
+        }
+
+        if (m_shootDoTween != null)
+        {
+            m_shootDoTween.Kill();
+        }
+        
+        if (m_shootDoTweenEnd != null)
+        {
+            m_shootDoTweenEnd.Kill();
+        }
     }
     
     private void OnDestroy()
@@ -76,10 +99,26 @@ public class Player : MonoBehaviour
         {
             m_shootAction.action.started -= OnShoot;
         } 
+        
+        if (m_movementDoTween != null)
+        {
+            m_movementDoTween.Kill();
+        }
+
+        if (m_shootDoTween != null)
+        {
+            m_shootDoTween.Kill();
+        }
+        
+        if (m_shootDoTweenEnd != null)
+        {
+            m_shootDoTweenEnd.Kill();
+        }
     }
 
     public void ResetPlayer()
     {
+
         if (m_moveAction)
         {
             m_moveAction.action.started -= OnMove;
@@ -105,7 +144,7 @@ public class Player : MonoBehaviour
         float delta = m_direction * m_speed * Time.deltaTime;
         transform.position = GameManager.Instance.KeepInBounds(transform.position + Vector3.right * delta);
         Vector3 rotation = new Vector3(0.0f, 0.0f, -20.0f * m_direction);
-        transform.DORotate(rotation, 0.2f);
+        m_movementDoTween = transform.DORotate(rotation, 0.2f);
     }
 
     private void OnShoot(InputAction.CallbackContext ctx)
@@ -126,9 +165,9 @@ public class Player : MonoBehaviour
         Instantiate(m_bulletPrefab, m_shootAt.position, Quaternion.identity);
         GameObject nuzzle = Instantiate(m_nuzzleParticleEffect, m_shootAt.position, Quaternion.identity);
         StartCoroutine(NuzzleDeath(nuzzle));
-        transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
+        m_shootDoTween = transform.DOScaleY(0.3f, 0.2f).OnComplete(() =>
         {
-            transform.DOScaleY(0.5f, 0.1f);
+            m_shootDoTweenEnd = transform.DOScaleY(0.5f, 0.1f);
         });
 
         m_lastShootTimestamp = Time.time;
@@ -144,6 +183,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag != m_collideWithTag) { return; }
 
+        PlayerHitEvent.Invoke();
         GameManager.Instance.PlayGameOver();
     }
 }

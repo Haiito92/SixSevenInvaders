@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
                 MainMenuUI.SetActive(true);
                 SoundManager.Instance.StopMusic();
                 SoundManager.Instance.PlayMusic(mainMenuMusic);
+                currentPlayer.enabled = false;
                 break;
             case GameState.START_GAME:
                 MainMenuUI.SetActive(false);
@@ -127,6 +128,7 @@ public class GameManager : MonoBehaviour
                 SoundManager.Instance.StopMusic();
                 SoundManager.Instance.PlayMusic(gameMusic);
                 Time.timeScale = 1f;
+                currentPlayer.enabled = true;
                 break;
             case GameState.GAME: //GameRunning main game WITH WAVE
                 StopCoroutine(_waitForWavesCoroutine);
@@ -140,6 +142,8 @@ public class GameManager : MonoBehaviour
             case GameState.WAVE_STANDBY: //Between 2 waves
                 StartCoroutine(_waitForWavesCoroutine);
                 _indexOfPatterns++;
+                m_fullScreenPostProcess.m_effectSpeed = 2.0f;
+                m_fullScreenPostProcess.StartEffect();
                 break;
             case GameState.GAME_OVER: //EndGame if player dead OR lastWave is done
                 StopAllCoroutines();
@@ -152,6 +156,8 @@ public class GameManager : MonoBehaviour
                     ScoreManager.Instance.AddGameScoreToHighScores();
                     ScoreManager.Instance.ResetScore();
                 }
+                
+                currentPlayer.enabled = false;
                 
                 EndMenuUI.SetActive(true);
                 HighScoresUI?.UpdateHighScoresUI();
@@ -166,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnWave(GameObject wavePatern)
     {
-        GameObject newWave = Instantiate(wavePatern, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject newWave = Instantiate(wavePatern, new Vector3(0, 2, 0), Quaternion.identity);
         Wave waveScript = newWave.GetComponent<Wave>();
         if ( waveScript!= null)
         {
