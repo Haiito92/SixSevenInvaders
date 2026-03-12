@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RipplePostProcessMat
-  m_Shader: {fileID: -6465566751694194690, guid: 7642195a43d4a5440a1551bae8ec4d3b, type: 3}
+  m_Name: BulletEnemy 1
+  m_Shader: {fileID: 4800000, guid: c10299d6bdc54394088952fc5b12c23a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,8 +23,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _RippleRT:
-        m_Texture: {fileID: 8400000, guid: ca19964613fc2a747be09794fb77a5a8, type: 2}
+    - _TextureSample0:
+        m_Texture: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -40,11 +40,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _Alpha: 0.25
-    - _Float: 0.45
-    - _PixelRatio: 16
+    m_Floats: []
     m_Colors:
-    - _RippleColor: {r: 0.654902, g: 0.8431373, b: 0.8117648, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

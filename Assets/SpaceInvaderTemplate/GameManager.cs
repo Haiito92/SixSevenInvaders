@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
                 MainMenuUI.SetActive(true);
                 SoundManager.Instance.StopMusic();
                 SoundManager.Instance.PlayMusic(mainMenuMusic);
+                currentPlayer.enabled = false;
                 break;
             case GameState.START_GAME:
                 MainMenuUI.SetActive(false);
@@ -127,6 +128,7 @@ public class GameManager : MonoBehaviour
                 SoundManager.Instance.StopMusic();
                 SoundManager.Instance.PlayMusic(gameMusic);
                 Time.timeScale = 1f;
+                currentPlayer.enabled = true;
                 break;
             case GameState.GAME: //GameRunning main game WITH WAVE
                 StopCoroutine(_waitForWavesCoroutine);
@@ -152,6 +154,8 @@ public class GameManager : MonoBehaviour
                     ScoreManager.Instance.AddGameScoreToHighScores();
                     ScoreManager.Instance.ResetScore();
                 }
+                
+                currentPlayer.enabled = false;
                 
                 EndMenuUI.SetActive(true);
                 HighScoresUI?.UpdateHighScoresUI();
