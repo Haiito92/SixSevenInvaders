@@ -29,6 +29,8 @@ public class Invader : MonoBehaviour
     private Vector2 m_pivot;
     [SerializeField] private float m_offsetRadius;
     [SerializeField] private float m_offsetMoveSpeed = 1.0f;
+    [SerializeField] private Vector2 m_offsetPower = Vector2.one;
+    
     
     private Vector2 m_originalScale;
     [SerializeField] private Vector2 m_squashPower;
@@ -64,8 +66,8 @@ public class Invader : MonoBehaviour
     private void Update()
     {
         Vector2 offset = new Vector2(
-            Mathf.Cos((Time.time + m_randomCosOffset) * Mathf.PI / m_offsetMoveSpeed), 
-            Mathf.Sin((Time.time + m_randomSinOffset) * Mathf.PI / m_offsetMoveSpeed));
+            Mathf.Cos((Time.time + m_randomCosOffset) * m_offsetPower.x * Mathf.PI / m_offsetMoveSpeed), 
+            Mathf.Sin((Time.time + m_randomSinOffset) * m_offsetPower.y * Mathf.PI / m_offsetMoveSpeed));
         offset *= m_offsetRadius;
         
         transform.localPosition = m_pivot + offset;
