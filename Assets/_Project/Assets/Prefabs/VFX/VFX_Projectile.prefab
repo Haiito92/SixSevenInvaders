@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.4910802, g: 0.5605887, b: 0.81761, a: 1}
-      maxColor: {r: 0.007843138, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.60806525, g: 0.899371, b: 0.8298129, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0, g: 1, b: 1, a: 1}
@@ -5059,7 +5059,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.4910802, g: 0.5605887, b: 0.81761, a: 1}
-      maxColor: {r: 0.007843138, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0, g: 1, b: 1, a: 1}
@@ -5123,7 +5123,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10.62
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -9618,7 +9618,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f72b7c84313ea4e4aa91b26558a0cc6d, type: 2}
+  - {fileID: 2100000, guid: abb199a4c2760644d9d835a18e479288, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9802,8 +9802,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.06034165, g: 0.7106918, b: 0.7106918, a: 0.8156863}
-      key1: {r: 0, g: 1, b: 1, a: 0}
+      key0: {r: 0.58980596, g: 0.90599996, b: 0.8058719, a: 0.8156863}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -9811,7 +9811,7 @@ TrailRenderer:
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65278
+      ctime1: 65535
       ctime2: 0
       ctime3: 0
       ctime4: 0
