@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FullScreenPixel : MonoBehaviour
 {
     [SerializeField, Range(0.1f, 100.0f)] public float m_effectSpeed = 1.0f; 
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     [SerializeField] private GameObject m_67Particle;
+    [SerializeField] private AudioClip m_64Sound;
     private GameObject _67Object;
     
     private Coroutine m_coroutine;
@@ -20,6 +22,7 @@ public class FullScreenPixel : MonoBehaviour
     public void StartEffect()
     {
         StopEffect();
+        SoundManager.Instance.PlaySFX2D(m_64Sound, 0.1f, Random.Range(0.5f,1.5f));
         _67Object = Instantiate(m_67Particle, transform.position, Quaternion.identity);
         m_coroutine = StartCoroutine(Effect());
     }
