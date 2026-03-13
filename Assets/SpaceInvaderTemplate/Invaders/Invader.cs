@@ -113,8 +113,9 @@ public class Invader : MonoBehaviour
             hitParticle = Instantiate(m_onHitParticle, collision.transform.position, Quaternion.identity);
             deathParticle = Instantiate(m_onDieParticle, transform.position, Quaternion.identity);
             
-            Destroy(hitParticle, hitParticle.GetComponent<ParticleSystem>().main.duration);
-            Destroy(deathParticle, deathParticle.GetComponent<ParticleSystem>().main.duration);
+            Destroy(hitParticle, hitParticle.GetComponentInChildren<ParticleSystem>().main.duration);
+            Destroy(deathParticle, deathParticle.GetComponentInChildren<ParticleSystem>().main.duration);
+            
         }
 
         if (!VfxDebug.BlockScoreEffects)
