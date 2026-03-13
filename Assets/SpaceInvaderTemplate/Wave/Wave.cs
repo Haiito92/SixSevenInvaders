@@ -108,12 +108,16 @@ public class Wave : MonoBehaviour
         if (shootCooldown > 0) { return; }
 
         // Shoot rate depends on remaining invaders ratio
-        float t = 1f - (invaders.Count - 1) / (float)((rows * columns) - 1);
+        float maxInvaders = Mathf.Max(1, (rows * columns) - 1);
+        float t = 1f - (invaders.Count - 1) / maxInvaders;
         Vector2 shootRandom = Vector2.Lerp(shootRandomMin, shootRandomMax, difficultyProgress.Evaluate(t));
 
         // One column is selected to shoot a bullet. Only the invader at the bottom of that column can shoot.
         int columnIndex = Random.Range(0, invaderPerColumn.Count);
-        invaderPerColumn[columnIndex].invaders[0].Shoot();
+        if (invaderPerColumn[columnIndex].invaders.Count > 0)
+        {
+            invaderPerColumn[columnIndex].invaders[0].Shoot();
+        }
 
         shootCooldown += Random.Range(shootRandom.x, shootRandom.y);
     }
@@ -121,7 +125,8 @@ public class Wave : MonoBehaviour
     void UpdateMovement()
     {
         // Speed depends on remaining invaders ratio
-        float t = 1f - (invaders.Count - 1) / (float)((rows * columns) - 1);
+        float maxInvaders = Mathf.Max(1, (rows * columns) - 1);
+        float t = 1f - (invaders.Count - 1) / maxInvaders;
         float speed = Mathf.Lerp(speedMin, speedMax, difficultyProgress.Evaluate(t));
 
         Vector3 direction = directions[(int)move];
@@ -247,15 +252,19 @@ public class Wave : MonoBehaviour
         return new Vector3( GetColumnPosition(i), GetRowPosition(j), 0f );
     }
 
-    // Get position of an invader in the bounding box according to it's column index
     float GetColumnPosition(int column)
     {
+        if (columns <= 1)
+            return transform.position.x;
+
         return Mathf.Lerp(Bounds.min.x, Bounds.max.x, column / (float)(columns - 1));
     }
 
-    // Get position of an invader in the bounding box according to it's row index
     float GetRowPosition(int row)
     {
+        if (rows <= 1)
+            return transform.position.y;
+
         return Mathf.Lerp(Bounds.min.y, Bounds.max.y, row / (float)(rows - 1));
     }
 
