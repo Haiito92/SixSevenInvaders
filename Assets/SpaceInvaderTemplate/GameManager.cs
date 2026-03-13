@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     [Header("Pixelisation")] 
     [SerializeField] private FullScreenPixel m_fullScreenPostProcess;
 
-    void Awake()
+    void Start()
     {
         // if (Instance != null)
         // {
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         if(onGameStateChange != null) onGameStateChange -= OnGameStateChange;
-        QuitGame();
+        Application.Quit();
     }
 
     public void ChangeGameState(GameState newGameState)
@@ -278,6 +278,6 @@ public class GameManager : MonoBehaviour
     IEnumerator EndMenuToMainMenu()
     {
         yield return new WaitForSeconds(1.2f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }
