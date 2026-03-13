@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2be1b8b649bcf042b3e027aefee810c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundComponent
-  m_clip: {fileID: 8300000, guid: ae38614b3b9b1634b8ea5000875128cb, type: 3}
+  m_clip: {fileID: 8300000, guid: d9ba176cb56bfcd448f1fa5279e41445, type: 3}
   m_volume: 1
   m_pitch: 1
   m_randomPitch: 1
