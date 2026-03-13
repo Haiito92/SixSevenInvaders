@@ -450,6 +450,7 @@ MonoBehaviour:
   - {fileID: 7542242248972639614, guid: 9919e04e07e54f64da96cdb6f044d20f, type: 3}
   - {fileID: 7542242248972639614, guid: f2e0f65bea3d02f42bd442daeaf32256, type: 3}
   - {fileID: 7542242248972639614, guid: 2816fa9524a4dc8459c560e6d207a65f, type: 3}
+  - {fileID: 7542242248972639614, guid: abf550fdab1b47a4985bc469b982f983, type: 3}
   _indexOfPatterns: 0
   MainMenuUI: {fileID: 353107029}
   EndMenuUI: {fileID: 2027268102}
